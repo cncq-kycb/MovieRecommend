@@ -11,8 +11,8 @@
 		</commentGenerator>
 		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/recommend" userId="root"
-			password="wangbo1012">
+			connectionURL="jdbc:mysql://cdb-mzvws756.cd.tencentcdb.com:10143/recommend" userId="root"
+			password="qwe123!@#">
 		</jdbcConnection>
 		<!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg" 
 			userId="yycg" password="yycg"> </jdbcConnection> -->
@@ -44,7 +44,6 @@
 		</javaClientGenerator>
 
 		<table tableName="recommend_business"></table>
-		<table tableName="recommender_list"></table>
 
 	</context>
 </generatorConfiguration>
