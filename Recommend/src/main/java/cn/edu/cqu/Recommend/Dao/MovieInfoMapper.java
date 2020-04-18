@@ -4,8 +4,11 @@ import cn.edu.cqu.Recommend.Pojo.MovieInfo;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoExample;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoWithBLOBs;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface MovieInfoMapper {
     long countByExample(MovieInfoExample example);
 
