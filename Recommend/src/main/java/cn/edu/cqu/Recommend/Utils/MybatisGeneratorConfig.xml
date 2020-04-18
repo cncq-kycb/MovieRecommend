@@ -43,7 +43,10 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
-		<table tableName="recommend_business"></table>
+		<table tableName="session_info"></table>
+		<table tableName="movie_info"></table>
+		<table tableName="like_record"></table>
+		<table tableName="view_record"></table>
 
 	</context>
 </generatorConfiguration>
