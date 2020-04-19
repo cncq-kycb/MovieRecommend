@@ -3,7 +3,7 @@ package cn.edu.cqu.Recommend.Controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,21 +18,21 @@ public class ActionController {
 	ActionService actionService;
 
 	// 登录请求
-	@GetMapping(value = "/login")
+	@PostMapping(value = "/login")
 	@ResponseBody
 	public MyJson login(User user, HttpSession session) {
 		return actionService.login(user, session);
 	}
 
 	// 登出请求
-	@GetMapping(value = "/logout")
+	@PostMapping(value = "/logout")
 	@ResponseBody
 	public MyJson logout(User user, HttpSession session) {
 		return actionService.logout(session);
 	}
 
 	// 注册请求
-	@GetMapping(value = "/signup")
+	@PostMapping(value = "/signup")
 	@ResponseBody
 	public MyJson signup(User user) {
 		return actionService.signup(user);
