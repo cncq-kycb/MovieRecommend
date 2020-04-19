@@ -10,25 +10,25 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
-    long countByExample(UserExample example);
+	long countByExample(UserExample example);
 
-    int deleteByExample(UserExample example);
+	int deleteByExample(UserExample example);
 
-    int deleteByPrimaryKey(UserKey key);
+	int deleteByPrimaryKey(UserKey key);
 
-    int insert(User record);
+	int insert(User record);
 
-    int insertSelective(User record);
+	int insertSelective(User record);
 
-    List<User> selectByExample(UserExample example);
+	List<User> selectByExample(UserExample example);
 
-    User selectByPrimaryKey(UserKey key);
+	User selectByPrimaryKey(UserKey key);
 
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+	int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
-    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+	int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
-    int updateByPrimaryKeySelective(User record);
+	int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record);
+	int updateByPrimaryKey(User record);
 }
