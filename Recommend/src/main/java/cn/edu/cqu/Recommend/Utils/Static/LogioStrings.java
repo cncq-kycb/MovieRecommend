@@ -9,4 +9,7 @@ public class LogioStrings {
 
 	// Logout 相关
 	public static final String LOGOUT_SUCCESS = "登出成功";
+
+	// 用户登录状态相关
+	public static final String NOT_LOGIN = "尚未登录";
 }
