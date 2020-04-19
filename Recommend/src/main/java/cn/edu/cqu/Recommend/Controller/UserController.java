@@ -17,7 +17,7 @@ public class UserController {
 	UserService userService;
 
 	// 获取用户信息
-	@RequestMapping
+	@RequestMapping(value = "/getUserInfo")
 	@ResponseBody
 	public MyJson getUserInfo(HttpSession session) {
 		return userService.getUserInfo(session);
