@@ -12,8 +12,4 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping("/index")
-	public String gotoIndex() {
-		return "index";
-	}
 }
