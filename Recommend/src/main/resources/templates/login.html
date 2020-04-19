@@ -7,7 +7,7 @@
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no"> 
-    <title>账号注册</title>
+    <title>登录</title>
 
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
@@ -36,7 +36,7 @@
     <link rel="canonical" href="http://www.example.com/">
     -->
 
-    <link rel="stylesheet" href="css/amazeui.min.css">
+    <link rel="stylesheet" href="../static/css/amazeui.min.css">
 
     <style>
         html { font-size: 10px; }
@@ -75,7 +75,7 @@
     <![endif]-->
     <header>
         <a href="my.html"><i class="am-icon-angle-left back"></i></a>
-        <p>账号注册</p>
+        <p>登 录</p>
     </header>
     <div class="register">
         <div class="res-item">
@@ -83,29 +83,20 @@
             <input type="tel" placeholder="手机号" class="input-item mobile">
             <i class="res-icon am-icon-phone"></i>
         </div>
-        <div class="res-item">
-            
-            <input type="text" placeholder="验证码" class="input-item yanzheng">
-            <i class="res-icon am-icon-mobile"></i>
-            <button type="button" class="yanzhengma">发送验证码</button>
-        </div>
+
         <div class="res-item">
             
             <input type="passWord" placeholder="密码" class="input-item mima">
             <i class="res-icon am-icon-check-square-o"></i>
         </div>
-        <div class="res-item">
-            
-            <input type="passWord" placeholder="确认密码" class="input-item repeatmima">
-            <i class="res-icon am-icon-check-circle-o"></i>
-        </div>
+
         <div class="res-btn">
-            <button type="button" id="res-btn" class="am-btn am-btn-block">注册</button>
+            <button type="button" id="res-btn" class="am-btn am-btn-block">登录</button>
         </div>
     </div>
 
     <!--[if (gte IE 9)|!(IE)]><!-->
-    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="../static/js/jquery-3.2.1.min.js"></script>
     <!--<![endif]-->
     <!--[if lt IE 9]>
     <script src="../../../../../libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
@@ -166,7 +157,7 @@
             }
 
             $(this).prop('disabled',true);
-            alert('注册成功');
+            alert('登录成功');
         })
     </script>
 
