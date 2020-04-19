@@ -3,6 +3,7 @@ package cn.edu.cqu.Recommend.Controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ public class ActionController {
 	}
 
 	// 登出请求
-	@PostMapping(value = "/logout")
+	@GetMapping(value = "/logout")
 	@ResponseBody
 	public MyJson logout(HttpSession session) {
 		return actionService.logout(session);
