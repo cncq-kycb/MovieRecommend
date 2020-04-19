@@ -1,11 +1,13 @@
 package cn.edu.cqu.Recommend.Utils;
 
+import java.util.Date;
+
 public class MyJson {
 
 	private boolean success;
 	private Object message;
 	private long timestamp;
-	
+
 	public boolean isSuccess() {
 		return success;
 	}
@@ -30,11 +32,11 @@ public class MyJson {
 		this.timestamp = timestamp;
 	}
 
-	public MyJson(boolean success, Object message, long timestamp) {
+	public MyJson(boolean success, Object message) {
 		super();
 		this.success = success;
 		this.message = message;
-		this.timestamp = timestamp;
+		this.timestamp = new Date().getTime();
 	}
 
 	@Override
