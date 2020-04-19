@@ -1,7 +1,5 @@
 package cn.edu.cqu.Recommend.Service.ServiceImpl;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +25,9 @@ public class UserServiceImpl implements UserService {
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
 			// 未登录用户
-			return new MyJson(false, LogioStrings.NOT_LOGIN, new Date().getTime());
+			return new MyJson(false, LogioStrings.NOT_LOGIN);
 		}
 		// 已登录用户
-		return new MyJson(true, user, new Date().getTime());
+		return new MyJson(true, user);
 	}
 }
