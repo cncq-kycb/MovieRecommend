@@ -36,7 +36,7 @@
     <link rel="canonical" href="http://www.example.com/">
     -->
 
-    <link rel="stylesheet" href="css/amazeui.min.css">
+    <link rel="stylesheet" href="/login/css/amazeui.min.css">
 
     <style>
         html { font-size: 10px; }
@@ -66,6 +66,7 @@
         .res-btn button {  background-color: #e21945;font-size: 14px; color: #fff;border-radius: 8px; }
         .res-btn button:focus { color: #fff; }
     </style>
+    <script src="/login/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
     <!--[if lte IE 9]>
@@ -74,29 +75,23 @@
       以获得更好的体验！</p>
     <![endif]-->
     <header>
-        <a href="my.html"><i class="am-icon-angle-left back"></i></a>
+        <a href="login.html"><i class="am-icon-angle-left back"></i></a>
         <p>账号注册</p>
     </header>
     <div class="register">
         <div class="res-item">
             
-            <input type="tel" placeholder="手机号" class="input-item mobile">
+            <input type="tel" placeholder="手机号" class="input-item mobile" id="tel">
             <i class="res-icon am-icon-phone"></i>
         </div>
         <div class="res-item">
             
-            <input type="text" placeholder="验证码" class="input-item yanzheng">
-            <i class="res-icon am-icon-mobile"></i>
-            <button type="button" class="yanzhengma">发送验证码</button>
-        </div>
-        <div class="res-item">
-            
-            <input type="passWord" placeholder="密码" class="input-item mima">
+            <input type="passWord" placeholder="密码" class="input-item mima" id="passwords">
             <i class="res-icon am-icon-check-square-o"></i>
         </div>
         <div class="res-item">
             
-            <input type="passWord" placeholder="确认密码" class="input-item repeatmima">
+            <input type="passWord" placeholder="确认密码" class="input-item repeatmima" id="passwordsi">
             <i class="res-icon am-icon-check-circle-o"></i>
         </div>
         <div class="res-btn">
@@ -104,38 +99,9 @@
         </div>
     </div>
 
-    <!--[if (gte IE 9)|!(IE)]><!-->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <!--<![endif]-->
-    <!--[if lt IE 9]>
-    <script src="../../../../../libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="../../../../../cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-    <script src="../../../wechatMember/js/amazeui.ie8polyfill.min.js"></script>
-    <![endif]-->
     <script>
-        var times = 10;
-        function roof(){
-            if(times == 0){
-                $('.yanzhengma').text('发送验证码('+times+'s)');
-                $('.yanzhengma').prop('disabled',false);
-                $('.yanzhengma').text('发送验证码');
-                times = 10;
-                return
-            }
-            $('.yanzhengma').text('发送验证码('+times+'s)');
-            times--;
-
-            setTimeout(roof,1000);
-        }
-        $('.yanzhengma').on('click',function(){
-            
-            $(this).prop('disabled',true);
-            roof();
-
-        });
         $('#res-btn').on('click',function(){
             var mobile = $('.mobile').val();
-            var yanzheng = $('.yanzheng').val();
             var mima = $('.mima').val();
             var repeatmima = $('.repeatmima').val();
             if(!mobile){
@@ -143,10 +109,11 @@
                 document.querySelector('.mobile').placeholder = '请填写手机号码';
                 return
             }
-            if(!yanzheng){
-                $('.yanzheng').focus();
-                document.querySelector('.yanzheng').placeholder = '请填写验证码';
-                return
+            if(!(/^1[3456789]\d{9}$/.test(mobile))){ 
+            	$('.mobile').focus();
+            	document.querySelector('.mobile').value = '';
+                document.querySelector('.mobile').placeholder = '请填写11位手机号码';
+            	return 
             }
             if(!mima){
                 $('.mima').focus();
@@ -165,8 +132,22 @@
                 return
             }
 
-            $(this).prop('disabled',true);
-            alert('注册成功');
+
+            var User = {};
+                    User["userTel"]   =     mobile;
+                    User["userPassword"]  =  mima;
+                    
+                    $.ajax({
+                        type: "post",
+                        url:"/signup" ,
+                        async:false,
+                        dataType: "json",
+                        data:User,
+                        success:function(data) {
+						alert(daata.result);
+                        },
+                        error:function(){alert("网络错误")}
+                    });
         })
     </script>
 
