@@ -131,8 +131,6 @@
                 document.querySelector('.repeatmima').placeholder = '两次密码不一致';
                 return
             }
-
-
             var User = {};
                     User["userTel"]   =     mobile;
                     User["userPassword"]  =  mima;
@@ -144,12 +142,11 @@
                         dataType: "json",
                         data:User,
                         success:function(data) {
-						alert(daata.result);
+						alert(data.message);
                         },
                         error:function(){alert("err back！！！")}
                     });
         })
     </script>
-
 </body>
 </html>
