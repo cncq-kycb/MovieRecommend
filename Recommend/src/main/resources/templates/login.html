@@ -36,7 +36,7 @@
     <link rel="canonical" href="http://www.example.com/">
     -->
 
-    <link rel="stylesheet" href="css/amazeui.min.css">
+    <link rel="stylesheet" href="/login/css/amazeui.min.css">
 
     <style>
         html { font-size: 10px; }
@@ -93,71 +93,49 @@
         <div class="res-btn">
             <button type="button" id="res-btn" class="am-btn am-btn-block">登录</button>
         </div>
+        </br>
+        <center><a href="signup.html">还没有账号？快来注册一个吧！</a></a></center>
     </div>
 
-    <!--[if (gte IE 9)|!(IE)]><!-->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <!--<![endif]-->
-    <!--[if lt IE 9]>
-    <script src="../../../../../libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="../../../../../cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-    <script src="../../../wechatMember/js/amazeui.ie8polyfill.min.js"></script>
-    <![endif]-->
+    <script src="/login/js/jquery-3.2.1.min.js"></script>
     <script>
-        var times = 10;
-        function roof(){
-            if(times == 0){
-                $('.yanzhengma').text('发送验证码('+times+'s)');
-                $('.yanzhengma').prop('disabled',false);
-                $('.yanzhengma').text('发送验证码');
-                times = 10;
-                return
-            }
-            $('.yanzhengma').text('发送验证码('+times+'s)');
-            times--;
-
-            setTimeout(roof,1000);
-        }
-        $('.yanzhengma').on('click',function(){
-            
-            $(this).prop('disabled',true);
-            roof();
-
-        });
         $('#res-btn').on('click',function(){
             var mobile = $('.mobile').val();
-            var yanzheng = $('.yanzheng').val();
             var mima = $('.mima').val();
-            var repeatmima = $('.repeatmima').val();
             if(!mobile){
                 $('.mobile').focus();
                 document.querySelector('.mobile').placeholder = '请填写手机号码';
                 return
             }
-            if(!yanzheng){
-                $('.yanzheng').focus();
-                document.querySelector('.yanzheng').placeholder = '请填写验证码';
-                return
+            if(!(/^1[3456789]\d{9}$/.test(mobile))){ 
+            	$('.mobile').focus();
+            	document.querySelector('.mobile').value = '';
+                document.querySelector('.mobile').placeholder = '请填写11位手机号码';
+            	return 
             }
             if(!mima){
                 $('.mima').focus();
                 document.querySelector('.mima').placeholder = '请填写密码';
                 return
             }
-            if(!repeatmima){
-                $('.repeatmima').focus();
-                document.querySelector('.repeatmima').placeholder = '请填写重复密码';
-                return
-            }
-            if(repeatmima !== mima){
-                $('.repeatmima').focus();
-                document.querySelector('.repeatmima').value = '';
-                document.querySelector('.repeatmima').placeholder = '两次密码不一致';
-                return
-            }
-
-            $(this).prop('disabled',true);
-            alert('登录成功');
+			var User = {
+					User["userTel"] = mobile
+					User["userPassword"] = mobile;
+				};
+				var action = "/login";
+				$.ajax({
+					type : "post",
+					url : action,
+					data : User,
+					dataType : "json",
+					contentType : "application/json;charset=UTF-8",
+					success : function(result) {
+							alert(result);
+					},
+					error : function(result) {
+						alert("err back");
+					}
+				});
         })
     </script>
 

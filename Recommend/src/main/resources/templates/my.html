@@ -8,25 +8,58 @@
 <script>/*@cc_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @*/</script>
 <title></title>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
+<script type="text/javascript">
+	var action = "/getUserInfo";
+	$.get(
+					action,
+					function(data) {
+						var user_info = data;
+						var old = '';
+						if (user_info.name == null
+								|| user_info.userTypeId != '1') {
+							window.location.href = 'login.html';
+						} else {
+							old += '<ul class="nav navbar-nav" data-in="fadeIn" data-out="fadeOut"><li class="dropdown megamenu-fw active"><a href="admin_main.html">管理员首页</a></li>'
+									+ '<li><a href="admin_manage_user_type.html">管理用户类别</a></li><li><a href="admin_manage_user_permission.html">管理用户权限</a></li><li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li></ul>';
+							$("#navbar-menu").html(old);
+							var old2 = "";
+							old2 += '<h3 id="name">&ensp;欢迎您，'
+									+ user_info.name
+									+ '</h3><p class="bottom30">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;'
+
+									+ '</p><table class="agent_contact table"> <tbody><tr class="bottom10"><td><strong >手机:</strong></td><td class="text-left" id="tel">'
+									+ user_info.tel
+									+ '</td></tr><tr class="bottom10"><td><strong>地区:</strong></td><td class="text-left">'
+									+ user_info.location
+									+ '</td></tr><tr class="bottom10"><td><strong>年龄</strong></td><td class="text-left">'
+									+ user_info.age
+									+ '</td></tr></tbody></table><div style="border-bottom:1px solid #d3d8dd;" class="bottom15"></div><ul class="social_share"><li><a href="javascript:void(0)" class="facebook"><i class="icon-facebook-1"></i></a></li><li><a href="javascript:void(0)" class="twitter"><i class="icon-twitter-1"></i></a></li><li><a href="javascript:void(0)" class="google"><i class="icon-google4"></i></a></li><li><a href="javascript:void(0)" class="linkden"><i class="fa fa-linkedin"></i></a></li><li><a href="javascript:void(0)" class="vimo"><i class="icon-vimeo3"></i></a></li></ul>'
+							$("#userInfo").html(old2);
+						}
+					});
+</script>
 </head>
 
 <body>
 <div class="m0myheader">
-  <div class="conbox">
+  <div class="conbox" id="UserInfo">
+
+    <h2>&ensp;</h2>
+  <center>
+<a href="login.html"><h1><font color="white">登录/注册</font></h1></a>
+</center>
+<!--  
     <div class="conboxL">
-      <img src="images/tx.jpg" class="tt"/>
+      <img src="images/tx.png" class="tt"/>
       <div class="btR">
-        <p class="p1">越活越回漩sa</p>
-        <div class="v1">
-          <img src="images/mmm.png" />
-          <p>编辑个人资料></p>
-        </div>
+        <p class="p1">18002337922</p>
       </div>
     </div>
     <div class="conboxR">
-       <a href="shezhi.html">退出登录</a>
+       <a href="javascript:void(0);" onclick="logout()">退出登录</a>
     </div>
     <div class="clear"></div>
+    -->
   </div>
   <div class="conbox2">
     <ul>
@@ -74,5 +107,18 @@
     </ul>
   </div>
 </div>
+<script>
+		function logout() {
+			var url = '/logout';
+			$.get(url, function(data) {
+				if (data == 1) {
+					window.location.reload();
+				}
+				if (data == 0) {
+					alert('退出有误！');
+				}
+			});
+		};
+</script>
 </body>
 </html>
