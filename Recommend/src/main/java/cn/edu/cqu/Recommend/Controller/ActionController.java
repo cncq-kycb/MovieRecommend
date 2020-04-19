@@ -30,4 +30,11 @@ public class ActionController {
 	public MyJson logout(User user, HttpSession session) {
 		return actionService.logout(session);
 	}
+
+	// 注册请求
+	@GetMapping(value = "/signup")
+	@ResponseBody
+	public MyJson signup(User user) {
+		return actionService.signup(user);
+	}
 }

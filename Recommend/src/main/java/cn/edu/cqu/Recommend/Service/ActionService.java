@@ -16,4 +16,7 @@ public interface ActionService {
 	// 登出服务
 	MyJson logout(HttpSession session);
 
+	// 注册服务
+	MyJson signup(User user);
+
 }
