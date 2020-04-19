@@ -27,7 +27,7 @@ public class ActionController {
 	// 登出请求
 	@PostMapping(value = "/logout")
 	@ResponseBody
-	public MyJson logout(User user, HttpSession session) {
+	public MyJson logout(HttpSession session) {
 		return actionService.logout(session);
 	}
 
