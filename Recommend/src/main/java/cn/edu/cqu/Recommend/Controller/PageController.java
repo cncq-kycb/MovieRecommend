@@ -30,4 +30,22 @@ public class PageController {
 		return "my";
 	}
 
+	// 跳转到登录页面
+	@RequestMapping("/login.html")
+	public String gotoLogin() {
+		return "login";
+	}
+
+	// 跳转到注册页面
+	@RequestMapping("/signup.html")
+	public String gotoSignup() {
+		return "signup";
+	}
+
+	// 跳转到搜索页面
+	@RequestMapping("seacher.html")
+	public String gotoSearch() {
+		return "seacher";
+	}
+
 }
