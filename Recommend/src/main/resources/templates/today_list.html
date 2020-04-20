@@ -8,6 +8,8 @@
 <script>/*@cc_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @*/</script>
 <title></title>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
+	<!-- Iconos -->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <style>
 
 ul {
@@ -113,9 +115,143 @@ a {
 </style>
 
 <script src="js/jquery-1.8.1.min.js"></script>
-<script src="js/index.js"></script></body>
+<script src="js/index.js" reload="1"></script>
+<script type="text/javascript">
+	var query = window.location.search.substring(1);
+	var vars = query.split("&");
+	var movieId = -1;
+	for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == "movieId"){
+       	 movieId = pair[1];
+     	   }
+	}
+	var url="/getMovie?movieId="+movieId;
+	$.get(
+			url,
+				function(data) {
+					if(data.success==true){
+					var old2 = '';
+						var item = data.message;
+						old2 += '<a href="#" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
+						+ item.movieImage
+						+'" alt=""></div><div class="aui-flex-box"><h1>'
+						+ item.movieName
+						+'</h1><h2>豆瓣评分 <em>'
+						+ item.movieRate
+						+'</em></h2><h3>导演：'
+						+ item.director
+						+'</h3><h3>主演：'
+						+ item.actor
+                       +'</h3></div></a>';
+						$("#movie").html(old2);	
+					}else{
+						alert('err back')
+					}
+				});
+</script>
+<script type="text/javascript">	
+var query = window.location.search.substring(1);
+var vars = query.split("&");
+var movieId = -1;
+for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if(pair[0] == "movieId"){
+   	 movieId = pair[1];
+ 	   }
+}
+	var action = "/getUserInfo";
+	$.get(
+					action,
+					function(data) {
+						var user_info = data;
+						var old = '';
+						if (user_info.success == true) {
+							
+					        var date = new Date();
+					        var seperator1 = "-";
+					        var year = date.getFullYear();
+					        var month = date.getMonth() + 1;
+					        var strDate = date.getDate();
+					        if (month >= 1 && month <= 9) {
+					            month = "0" + month;
+					        }
+					        if (strDate >= 0 && strDate <= 9) {
+					            strDate = "0" + strDate;
+					        }
+					        var currentdate = year + seperator1 + month + seperator1 + strDate;
+					        date.setDate(date.getDate()+1);
+					        year = date.getFullYear();
+					        month = date.getMonth() + 1;
+					        strDate = date.getDate();
+					        if (month >= 1 && month <= 9) {
+					            month = "0" + month;
+					        }
+					        if (strDate >= 0 && strDate <= 9) {
+					            strDate = "0" + strDate;
+					        }
+					        var tomorrowdate = year + seperator1 + month + seperator1 + strDate;
+							old = '<ul><li class="on" style="width:50%"><a href="today_list.html?movieId='
+							+ movieId
+							+'">今天（'
+							+ currentdate
+							+'）</a></li><li style="width:50%"><a href="tomorrow_list.html?movieId='
+							+ movieId
+							+'">明天（'
+							+ tomorrowdate
+							+'）</a></li></ul>';
+							$("#date").html(old);
+						} else {
+							alert('请登录后再进行操作');
+							window.location.href="/login.html";
+						}
+						
+					});
+</script>
+<script type="text/javascript">
+var query = window.location.search.substring(1);
+var vars = query.split("&");
+var movieId = -1;
+for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if(pair[0] == "movieId"){
+   	 movieId = pair[1];
+ 	   }
+}
+	var action = "/getSessionInfoToday?movieId="+movieId;
+	$.get(
+					action,
+					function(data) {
+						if(data.success==true){
+							
+						var old3 = '';	
+						for(i in data.message){
+							var item = data.message[i];
+							old3 += '<li><div class="link"><i class="fa fa-film"></i>'
+							+ item.cinema.cinemaName
+							+'<i class="fa fa-chevron-down"></i></div><ul class="submenu">';
+							for(j in data.message[i].sessions){
+								var session = data.message[i].sessions[j];
+								old3+='<li><a href="'
+								+ session.sessionSite
+								+'" target="_blank">'
+								+ session.sessionStart
+								+'-'
+								+ session.sessionEnd
+								+'<div style="float:right;"><b>￥'
+								+ session.sessionPrice
+								+'</b></div></a></li>';
+							}
+							old3+='</ul></li>';
+						}
+						old3 += '<script src="js/index.js" reload="1"></'+'script>';
+							$("#accordion").html(old3);
+						}else{
+							alert('err back')
+						}
+					});
+</script>
 </head>
-
 <body>
 <div class="headerbox">
   <div class="header">
@@ -132,71 +268,11 @@ a {
 <div class="clear"></div>
 
 <div class="hbox"></div>
-
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-003.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h3>时长：112分钟</h3>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-
-                    </a>
-<div class="myddstatu">
-  <ul>
-    <li class="on" style="width:50%">
-      <a href="today_list.html">今天（2020-04-20）</a>
-    </li>
-    <li style="width:50%">
-      <a href="tomorrow_list.html">明天（2020-04-21）</a>
-    </li>
-  </ul>
+				<div id="movie">
+                    </div>
+<div class="myddstatu" id="date">
 </div>					
-<div id="list">
-
-	<!-- Contenedor -->
 	<ul id="accordion" class="accordion">
-		<li>
-			<div class="link"><i class="fa fa-paint-brush"></i>UME影城沙坪坝店<i class="fa fa-chevron-down"></i></div>
-			<ul class="submenu">
-				<li><a href="#">08:00-10:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">10:00-12:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">14:00-16:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">15:00-17:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-			</ul>
-		</li>
-		<li>
-			<div class="link"><i class="fa fa-code"></i>越界影城沙坪坝店<i class="fa fa-chevron-down"></i></div>
-			<ul class="submenu">
-				<li><a href="#">08:00-10:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">10:00-12:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">14:00-16:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">15:00-17:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-			</ul>
-		</li>
-		<li>
-			<div class="link"><i class="fa fa-mobile"></i>橙天嘉禾影城<i class="fa fa-chevron-down"></i></div>
-			<ul class="submenu">
-				<li><a href="#">08:00-10:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">10:00-12:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">14:00-16:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">15:00-17:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-			</ul>
-		</li>
-		<li><div class="link"><i class="fa fa-globe"></i>沙坪坝电影院<i class="fa fa-chevron-down"></i></div>
-			<ul class="submenu">
-				<li><a href="#">08:00-10:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">10:00-12:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">14:00-16:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-				<li><a href="#">15:00-17:00<div style="float:right;"><b>￥69.00</b></div></a></li>
-			</ul>
-		</li>
 	</ul>
-	
-
-</div>
 </body>
 </html>

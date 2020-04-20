@@ -130,7 +130,8 @@
                 data:User,
                 success:function(data) {
 				if(data.success==true){
-					window.location.href="/my.html";
+					self.location=document.referrer;
+					
 				}
 				if (data.success==false) {
 					alert(data.message);

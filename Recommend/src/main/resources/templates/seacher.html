@@ -9,6 +9,43 @@
 <title></title>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 <script type="text/javascript" src="js/tab.js"></script>
+<script src="js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+function sender(){
+	var movieName = document.getElementById("movieName").value;
+	var action = "/searchMovie?input="+movieName;
+	$.get(
+			action,
+			function(data) {
+				if(data.success==true){
+					var old = '';
+					if(data.message==null||data.message==''){
+						old='<center>没有查询到任何结果</center>';
+					}else{
+				for(i in data.message){
+					var item = data.message[i];
+					old += '<a href="today_list.html?movieId='
+					+ item.movieId
+					+'" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
+					+ item.movieImage
+					+ '" alt=""></div><div class="aui-flex-box"><h1>'
+					+ item.movieName
+					+'</h1><h2>豆瓣评分 <em>'
+					+ item.movieRate
+					+'</em></h2><h3>导演：'
+					+ item.director
+					+'</h3><h3>主演：'
+					+ item.actor
+					+'</h3></div><div class="aui-film-button"><button>购票</button></div></a>';
+				}
+					}
+					$("#results").html(old);	
+				}else{
+					alert("err back");
+				}
+			});
+}
+</script> 
 </head>
 
 <body style="background:#fff">
@@ -19,37 +56,22 @@
     </div>
     <div class="headerC0">
       <div class="ssdiv">
-        <input name="" type="text" placeholder="找影视剧"/>
-        <a href="#.html"><img src="images/ss.png" /></a>
+        <input id="movieName" type="text" placeholder="找影视剧"/>
+        <a href="#" onclick="sender()"><img src="images/ss.png" /></a>
       </div>
     </div>
     <div class="headerR">
-      <a href="javascript:void(0);" onclick="/search()">查找</a>
+      <a href="#" onclick="sender()">查找</a>
     </div>
   </div>
 </div>
 <h1>&ensp;</h1><h1>&ensp;</h1>
        <section class="aui-scrollView">
-            <div class="tab-panel" id="results">
-                <div class="tab-panel-item tab-active">
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-001.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h2>豆瓣评分 <em>9.5</em></h2>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-                        <div class="aui-film-button">
-                            <button>购票</button>
-                        </div>
-                    </a>
+            <div class="tab-panel">
+                <div class="tab-panel-item tab-active" id="results">
                 </div>
             </div>
             <div style="height:55px;"></div>
-        </section>
-        
+        </section> 
 </body>
 </html>
