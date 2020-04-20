@@ -34,6 +34,13 @@ public class UserController {
 		return userService.getMovies();
 	}
 
+	// 搜索电影信息
+	@GetMapping("searchMovie")
+	@ResponseBody
+	public MyJson searchMovie(@RequestParam(required = true, value = "input") String input) {
+		return userService.searchMovie(input);
+	}
+
 	// 获取今日电影场次信息
 	@GetMapping(value = "/getSessionInfoToday")
 	@ResponseBody
