@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
 		MovieInfoExample movieInfoExample = new MovieInfoExample();
 		movieInfoExample.or().andMovieNameLike(condition);
 		try {
-			List<MovieInfo> movieInfos = movieInfoMapper.selectByExample(movieInfoExample);
+			List<MovieInfoWithBLOBs> movieInfos = movieInfoMapper.selectByExampleWithBLOBs(movieInfoExample);
 			return new MyJson(true, movieInfos);
 		} catch (Exception e) {
 			System.err.println(e);
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
 		MovieInfoExample movieInfoExample = new MovieInfoExample();
 		movieInfoExample.or().andMovieIdEqualTo(movieId);
 		try {
-			List<MovieInfo> movieInfos = movieInfoMapper.selectByExample(movieInfoExample);
+			List<MovieInfoWithBLOBs> movieInfos = movieInfoMapper.selectByExampleWithBLOBs(movieInfoExample);
 			if (movieInfos.size() != 0) {
 				// 查到结果
 				return new MyJson(true, movieInfos.get(0));
