@@ -154,4 +154,21 @@ public class UserServiceImpl implements UserService {
 			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
 		}
 	}
+
+	@Override
+	public MyJson getRecommendMovies(HttpSession session) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MyJson getRecommendMovies() {
+		try {
+			List<MovieInfoWithBLOBs> movieInfoWithBLOBs = movieInfoMapper.randomRecommend();
+			return new MyJson(true, movieInfoWithBLOBs);
+		} catch (Exception e) {
+			System.err.println(e);
+			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
+		}
+	}
 }

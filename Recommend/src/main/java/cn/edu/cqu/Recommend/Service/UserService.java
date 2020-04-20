@@ -20,8 +20,13 @@ public interface UserService {
 
 	// 按条件搜索电影信息
 	public MyJson searchMovie(String condition);
-	
+
 	// 根据电影ID获取电影信息
 	public MyJson getMovieById(Integer movieId);
+
+	// 推荐电影, 含参数为实际推荐, 不含参数为随机推荐
+	public MyJson getRecommendMovies(HttpSession session);
+
+	public MyJson getRecommendMovies();
 
 }
