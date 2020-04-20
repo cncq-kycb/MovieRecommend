@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -82,10 +83,13 @@ public class UserServiceImpl implements UserService {
 			List<Cinema> cinemas = cinemaMapper.selectByExample(cinemaExample);
 			List<CinemaSession> cinemaSessions = new ArrayList<CinemaSession>();
 			for (Cinema cinema : cinemas) {
+				Iterator<TimelySession> iterator = timelySessions.iterator();
 				List<TimelySession> tempList = new ArrayList<TimelySession>();
-				for (TimelySession timelySession : timelySessions) {
+				while (iterator.hasNext()) {
+					TimelySession timelySession = iterator.next();
 					if (cinema.getCinemaId().equals(timelySession.getCinemaId())) {
 						tempList.add(timelySession);
+						iterator.remove();
 					}
 				}
 				cinemaSessions.add(new CinemaSession(cinema, tempList));
