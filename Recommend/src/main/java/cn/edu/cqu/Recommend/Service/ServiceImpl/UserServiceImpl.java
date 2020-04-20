@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public MyJson searchMovie(String condition) {
+		condition = "%" + condition + "%";
 		MovieInfoExample movieInfoExample = new MovieInfoExample();
 		movieInfoExample.or().andMovieNameLike(condition);
 		try {
