@@ -19,7 +19,7 @@
 						if (user_info.success == true) {
 							old = '<div class="conboxL"><img src="images/tx.png" class="tt"/><div class="btR"><p class="p1">'
 								+ user_info.message.userTel
-								+'</p></div></div><div class="conboxR"><a href="javascript:void(0);" onclick="/logout()">退出登录</a></div><div class="clear"></div>';
+								+'</p></div></div><div class="conboxR"><a href="javascript:void(0);" onclick="logout()">退出登录</a></div><div class="clear"></div>';
 							
 						} else {
 							old = '<h2>&ensp;</h2><center><a href="login.html"><h1><font color="white">登录/注册</font></h1></a></center>';
@@ -82,7 +82,6 @@
 <script>
 		function logout() {
 			var url = '/logout';
-            
 			$.get(url, function(data) {
 				if (data.success==true) {
 					window.location.reload();

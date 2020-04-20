@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<meta name="renderer" content="webkit"/>
+<meta name="force-rendering" content="webkit"/>
+<script>/*@cc_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @*/</script>
+<title></title>
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<style>
+
+ul {
+	list-style-type: none;
+}
+
+a {
+	color: #b63b4d;
+	text-decoration: none;
+}
+
+/** =======================
+ * Contenedor Principal
+ ===========================*/
+
+
+ .accordion {
+ 	width: 100%;
+ 	margin: 30px auto 20px;
+ 	background: #FFF;
+ 	-webkit-border-radius: 4px;
+ 	-moz-border-radius: 4px;
+ 	border-radius: 4px;
+ }
+
+.accordion .link {
+	cursor: pointer;
+	display: block;
+	padding: 15px 15px 15px 42px;
+	color: #4D4D4D;
+	font-size: 14px;
+	font-weight: 700;
+	border-bottom: 1px solid #CCC;
+	position: relative;
+	-webkit-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link {
+	border-bottom: 0;
+}
+
+.accordion li i {
+	position: absolute;
+	top: 16px;
+	left: 12px;
+	font-size: 18px;
+	color: #595959;
+	-webkit-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+	right: 12px;
+	left: auto;
+	font-size: 16px;
+}
+
+.accordion li.open .link {
+	color: #b63b4d;
+}
+
+.accordion li.open i {
+	color: #b63b4d;
+}
+.accordion li.open i.fa-chevron-down {
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+/**
+ * Submenu
+ -----------------------------*/
+ .submenu {
+ 	display: none;
+ 	background: #444359;
+ 	font-size: 14px;
+ }
+
+ .submenu li {
+ 	border-bottom: 1px solid #4b4a5e;
+ }
+
+ .submenu a {
+ 	display: block;
+ 	text-decoration: none;
+ 	color: #d9d9d9;
+ 	padding: 12px;
+ 	padding-left: 42px;
+ 	-webkit-transition: all 0.25s ease;
+ 	-o-transition: all 0.25s ease;
+ 	transition: all 0.25s ease;
+ }
+
+ .submenu a:hover {
+ 	background: #b63b4d;
+ 	color: #FFF;
+ }
+</style>
+
+<script src="js/jquery-1.8.1.min.js"></script>
+<script src="js/index.js"></script></body>
+</head>
+
+<body>
+<div class="headerbox">
+  <div class="header">
+    <div class="headerL">
+      <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png" /></a>
+    </div>
+    <div class="headerC">
+      <p>选择影院</p>
+    </div>
+    <div class="headerR"></div>
+  </div>
+</div>
+
+<div class="clear"></div>
+
+<div class="hbox"></div>
+
+                    <a href="" type="" about="" class="aui-flex b-line">
+                        <div class="aui-film-img">
+                            <img src="images/film-ad-003.jpg" alt="">
+                        </div>
+                        <div class="aui-flex-box">
+                            <h1>流浪地球</h1>
+                            <h3>时长：112分钟</h3>
+                            <h3>导演:李嘉桦</h3>
+                            <h3>主演:无言 曲龙 李小萌</h3>
+                        </div>
+
+                    </a>
+<div class="myddstatu">
+  <ul>
+    <li class="on" style="width:50%">
+      <a href="today_list.html">今天（2020-04-20）</a>
+    </li>
+    <li style="width:50%">
+      <a href="tomorrow_list.html">明天（2020-04-21）</a>
+    </li>
+  </ul>
+</div>					
+<div id="list">
+
+	<!-- Contenedor -->
+	<ul id="accordion" class="accordion">
+		<li>
+			<div class="link"><i class="fa fa-paint-brush"></i>UME影城沙坪坝店<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu">
+				<li><a href="#">08:00-10:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">10:00-12:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">14:00-16:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">15:00-17:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+			</ul>
+		</li>
+		<li>
+			<div class="link"><i class="fa fa-code"></i>越界影城沙坪坝店<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu">
+				<li><a href="#">08:00-10:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">10:00-12:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">14:00-16:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">15:00-17:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+			</ul>
+		</li>
+		<li>
+			<div class="link"><i class="fa fa-mobile"></i>橙天嘉禾影城<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu">
+				<li><a href="#">08:00-10:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">10:00-12:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">14:00-16:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">15:00-17:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+			</ul>
+		</li>
+		<li><div class="link"><i class="fa fa-globe"></i>沙坪坝电影院<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu">
+				<li><a href="#">08:00-10:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">10:00-12:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">14:00-16:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+				<li><a href="#">15:00-17:00<div style="float:right;"><b>￥69.00</b></div></a></li>
+			</ul>
+		</li>
+	</ul>
+	
+
+</div>
+</body>
+</html>
