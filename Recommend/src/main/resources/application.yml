@@ -3,9 +3,11 @@ server:
    tomcat:
       uri-encoding: utf-8
 spring:
+   jackson:
+      time-zone: GMT+8
    datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: 'jdbc:mysql://cdb-mzvws756.cd.tencentcdb.com:10143/recommend?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf8'
+      url: 'jdbc:mysql://cdb-mzvws756.cd.tencentcdb.com:10143/recommend?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8'
       username: guest
       password: 'zxc123!@#'
       max-idle: 10
