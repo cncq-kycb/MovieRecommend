@@ -12,9 +12,11 @@ import cn.edu.cqu.Recommend.Dao.SearchRecordMapper;
 import cn.edu.cqu.Recommend.Dao.UserMapper;
 import cn.edu.cqu.Recommend.Dao.ViewRecordMapper;
 import cn.edu.cqu.Recommend.Pojo.SearchRecord;
+import cn.edu.cqu.Recommend.Pojo.SearchRecordExample;
 import cn.edu.cqu.Recommend.Pojo.User;
 import cn.edu.cqu.Recommend.Pojo.UserExample;
 import cn.edu.cqu.Recommend.Pojo.ViewRecord;
+import cn.edu.cqu.Recommend.Pojo.ViewRecordExample;
 import cn.edu.cqu.Recommend.Service.ActionService;
 import cn.edu.cqu.Recommend.Utils.MyJson;
 import cn.edu.cqu.Recommend.Utils.Static.LogioStrings;
@@ -44,7 +46,7 @@ public class ActionServiceImpl implements ActionService {
 			return new MyJson(false, LogioStrings.WRONG_PASSWORD);
 		}
 		// 密码正确，建立session
-		session.setAttribute("user", user);
+		session.setAttribute("user", users.get(0));
 		return new MyJson(true, LogioStrings.LOGIN_SUCCESS);
 	}
 
@@ -74,11 +76,23 @@ public class ActionServiceImpl implements ActionService {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean viewLog(HttpSession session, Integer movieId) {
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
 			// 未登录
+			return false;
+		}
+		Date time_now = new Date();
+		ViewRecordExample viewRecordExample = new ViewRecordExample();
+		viewRecordExample.or().andMovieIdEqualTo(movieId).andUserTelEqualTo(user.getUserTel()).andViewRecordTimeBetween(
+				new Date(time_now.getYear(), time_now.getMonth(), time_now.getDate(), 0, 0, 0),
+				new Date(time_now.getYear(), time_now.getMonth(), time_now.getDate(), 23, 59, 59));
+		List<ViewRecord> recentRecords = viewRecordMapper.selectByExample(viewRecordExample);
+		if (recentRecords.size() != 0) {
+			// 当天已有浏览记录，不再记录
+			System.out.println(recentRecords.get(0).toString());
 			return false;
 		}
 		ViewRecord viewRecord = new ViewRecord();
@@ -95,11 +109,23 @@ public class ActionServiceImpl implements ActionService {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean searchLog(HttpSession session, String input) {
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
 			// 未登录
+			return false;
+		}
+		Date time_now = new Date();
+		SearchRecordExample searchRecordExample = new SearchRecordExample();
+		searchRecordExample.or().andSearchRecordItemEqualTo(input).andUserIdEqualTo(user.getUserId())
+				.andSearchRecordTimeBetween(
+						new Date(time_now.getYear(), time_now.getMonth(), time_now.getDate(), 0, 0, 0),
+						new Date(time_now.getYear(), time_now.getMonth(), time_now.getDate(), 23, 59, 59));
+		List<SearchRecord> recentRecords = searchRecordMapper.selectByExample(searchRecordExample);
+		if (recentRecords.size() != 0) {
+			// 当天已有浏览记录，不再记录
 			return false;
 		}
 		SearchRecord searchRecord = new SearchRecord();
