@@ -11,6 +11,8 @@ public class MovieInfo {
 
     private String director;
 
+    private String movieImage;
+
     public Integer getMovieId() {
         return movieId;
     }
@@ -41,5 +43,13 @@ public class MovieInfo {
 
     public void setDirector(String director) {
         this.director = director == null ? null : director.trim();
+    }
+
+    public String getMovieImage() {
+        return movieImage;
+    }
+
+    public void setMovieImage(String movieImage) {
+        this.movieImage = movieImage == null ? null : movieImage.trim();
     }
 }

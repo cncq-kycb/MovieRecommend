@@ -6,6 +6,7 @@
     <result column="movie_name" jdbcType="VARCHAR" property="movieName" />
     <result column="movie_rate" jdbcType="DECIMAL" property="movieRate" />
     <result column="director" jdbcType="VARCHAR" property="director" />
+    <result column="movie_image" jdbcType="VARCHAR" property="movieImage" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.edu.cqu.Recommend.Pojo.MovieInfoWithBLOBs">
     <result column="movie_type" jdbcType="LONGVARCHAR" property="movieType" />
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    movie_id, movie_name, movie_rate, director
+    movie_id, movie_name, movie_rate, director, movie_image
   </sql>
   <sql id="Blob_Column_List">
     movie_type, actor
@@ -113,11 +114,11 @@
   </delete>
   <insert id="insert" parameterType="cn.edu.cqu.Recommend.Pojo.MovieInfoWithBLOBs">
     insert into movie_info (movie_id, movie_name, movie_rate, 
-      director, movie_type, actor
-      )
+      director, movie_image, movie_type, 
+      actor)
     values (#{movieId,jdbcType=INTEGER}, #{movieName,jdbcType=VARCHAR}, #{movieRate,jdbcType=DECIMAL}, 
-      #{director,jdbcType=VARCHAR}, #{movieType,jdbcType=LONGVARCHAR}, #{actor,jdbcType=LONGVARCHAR}
-      )
+      #{director,jdbcType=VARCHAR}, #{movieImage,jdbcType=VARCHAR}, #{movieType,jdbcType=LONGVARCHAR}, 
+      #{actor,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.cqu.Recommend.Pojo.MovieInfoWithBLOBs">
     insert into movie_info
@@ -133,6 +134,9 @@
       </if>
       <if test="director != null">
         director,
+      </if>
+      <if test="movieImage != null">
+        movie_image,
       </if>
       <if test="movieType != null">
         movie_type,
@@ -153,6 +157,9 @@
       </if>
       <if test="director != null">
         #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="movieImage != null">
+        #{movieImage,jdbcType=VARCHAR},
       </if>
       <if test="movieType != null">
         #{movieType,jdbcType=LONGVARCHAR},
@@ -183,6 +190,9 @@
       <if test="record.director != null">
         director = #{record.director,jdbcType=VARCHAR},
       </if>
+      <if test="record.movieImage != null">
+        movie_image = #{record.movieImage,jdbcType=VARCHAR},
+      </if>
       <if test="record.movieType != null">
         movie_type = #{record.movieType,jdbcType=LONGVARCHAR},
       </if>
@@ -200,6 +210,7 @@
       movie_name = #{record.movieName,jdbcType=VARCHAR},
       movie_rate = #{record.movieRate,jdbcType=DECIMAL},
       director = #{record.director,jdbcType=VARCHAR},
+      movie_image = #{record.movieImage,jdbcType=VARCHAR},
       movie_type = #{record.movieType,jdbcType=LONGVARCHAR},
       actor = #{record.actor,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -211,7 +222,8 @@
     set movie_id = #{record.movieId,jdbcType=INTEGER},
       movie_name = #{record.movieName,jdbcType=VARCHAR},
       movie_rate = #{record.movieRate,jdbcType=DECIMAL},
-      director = #{record.director,jdbcType=VARCHAR}
+      director = #{record.director,jdbcType=VARCHAR},
+      movie_image = #{record.movieImage,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
