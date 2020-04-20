@@ -3,11 +3,8 @@ package cn.edu.cqu.Recommend.Dao;
 import cn.edu.cqu.Recommend.Pojo.SessionInfo;
 import cn.edu.cqu.Recommend.Pojo.SessionInfoExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface SessionInfoMapper {
     long countByExample(SessionInfoExample example);
 

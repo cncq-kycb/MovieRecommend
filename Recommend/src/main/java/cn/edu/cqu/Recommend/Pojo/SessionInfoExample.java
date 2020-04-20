@@ -226,6 +226,66 @@ public class SessionInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andSessionIdIsNull() {
+            addCriterion("session_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdIsNotNull() {
+            addCriterion("session_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdEqualTo(Integer value) {
+            addCriterion("session_id =", value, "sessionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdNotEqualTo(Integer value) {
+            addCriterion("session_id <>", value, "sessionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdGreaterThan(Integer value) {
+            addCriterion("session_id >", value, "sessionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("session_id >=", value, "sessionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdLessThan(Integer value) {
+            addCriterion("session_id <", value, "sessionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdLessThanOrEqualTo(Integer value) {
+            addCriterion("session_id <=", value, "sessionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdIn(List<Integer> values) {
+            addCriterion("session_id in", values, "sessionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdNotIn(List<Integer> values) {
+            addCriterion("session_id not in", values, "sessionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdBetween(Integer value1, Integer value2) {
+            addCriterion("session_id between", value1, value2, "sessionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("session_id not between", value1, value2, "sessionId");
+            return (Criteria) this;
+        }
+
         public Criteria andMovieNameIsNull() {
             addCriterion("movie_name is null");
             return (Criteria) this;

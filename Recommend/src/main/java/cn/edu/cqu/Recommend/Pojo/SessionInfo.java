@@ -8,6 +8,8 @@ public class SessionInfo {
 
     private Integer cinemaId;
 
+    private Integer sessionId;
+
     private String movieName;
 
     private String cinemaName;
@@ -34,6 +36,14 @@ public class SessionInfo {
 
     public void setCinemaId(Integer cinemaId) {
         this.cinemaId = cinemaId;
+    }
+
+    public Integer getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(Integer sessionId) {
+        this.sessionId = sessionId;
     }
 
     public String getMovieName() {

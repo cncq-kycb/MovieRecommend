@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.edu.cqu.Recommend.Pojo.SessionInfo">
     <result column="movie_id" jdbcType="INTEGER" property="movieId" />
     <result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+    <result column="session_id" jdbcType="INTEGER" property="sessionId" />
     <result column="movie_name" jdbcType="VARCHAR" property="movieName" />
     <result column="cinema_name" jdbcType="VARCHAR" property="cinemaName" />
     <result column="session_start" jdbcType="TIMESTAMP" property="sessionStart" />
@@ -70,8 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    movie_id, cinema_id, movie_name, cinema_name, session_start, session_end, session_price, 
-    session_site
+    movie_id, cinema_id, session_id, movie_name, cinema_name, session_start, session_end, 
+    session_price, session_site
   </sql>
   <select id="selectByExample" parameterType="cn.edu.cqu.Recommend.Pojo.SessionInfoExample" resultMap="BaseResultMap">
     select
@@ -94,12 +95,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.edu.cqu.Recommend.Pojo.SessionInfo">
-    insert into session_info (movie_id, cinema_id, movie_name, 
-      cinema_name, session_start, session_end, 
-      session_price, session_site)
-    values (#{movieId,jdbcType=INTEGER}, #{cinemaId,jdbcType=INTEGER}, #{movieName,jdbcType=VARCHAR}, 
-      #{cinemaName,jdbcType=VARCHAR}, #{sessionStart,jdbcType=TIMESTAMP}, #{sessionEnd,jdbcType=TIMESTAMP}, 
-      #{sessionPrice,jdbcType=DECIMAL}, #{sessionSite,jdbcType=VARCHAR})
+    insert into session_info (movie_id, cinema_id, session_id, 
+      movie_name, cinema_name, session_start, 
+      session_end, session_price, session_site
+      )
+    values (#{movieId,jdbcType=INTEGER}, #{cinemaId,jdbcType=INTEGER}, #{sessionId,jdbcType=INTEGER}, 
+      #{movieName,jdbcType=VARCHAR}, #{cinemaName,jdbcType=VARCHAR}, #{sessionStart,jdbcType=TIMESTAMP}, 
+      #{sessionEnd,jdbcType=TIMESTAMP}, #{sessionPrice,jdbcType=DECIMAL}, #{sessionSite,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.cqu.Recommend.Pojo.SessionInfo">
     insert into session_info
@@ -109,6 +112,9 @@
       </if>
       <if test="cinemaId != null">
         cinema_id,
+      </if>
+      <if test="sessionId != null">
+        session_id,
       </if>
       <if test="movieName != null">
         movie_name,
@@ -135,6 +141,9 @@
       </if>
       <if test="cinemaId != null">
         #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="sessionId != null">
+        #{sessionId,jdbcType=INTEGER},
       </if>
       <if test="movieName != null">
         #{movieName,jdbcType=VARCHAR},
@@ -171,6 +180,9 @@
       <if test="record.cinemaId != null">
         cinema_id = #{record.cinemaId,jdbcType=INTEGER},
       </if>
+      <if test="record.sessionId != null">
+        session_id = #{record.sessionId,jdbcType=INTEGER},
+      </if>
       <if test="record.movieName != null">
         movie_name = #{record.movieName,jdbcType=VARCHAR},
       </if>
@@ -198,6 +210,7 @@
     update session_info
     set movie_id = #{record.movieId,jdbcType=INTEGER},
       cinema_id = #{record.cinemaId,jdbcType=INTEGER},
+      session_id = #{record.sessionId,jdbcType=INTEGER},
       movie_name = #{record.movieName,jdbcType=VARCHAR},
       cinema_name = #{record.cinemaName,jdbcType=VARCHAR},
       session_start = #{record.sessionStart,jdbcType=TIMESTAMP},
