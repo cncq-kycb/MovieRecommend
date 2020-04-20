@@ -29,4 +29,6 @@ public interface MovieInfoMapper {
 			@Param("example") MovieInfoExample example);
 
 	int updateByExample(@Param("record") MovieInfo record, @Param("example") MovieInfoExample example);
+
+	List<MovieInfoWithBLOBs> randomRecommend();
 }
