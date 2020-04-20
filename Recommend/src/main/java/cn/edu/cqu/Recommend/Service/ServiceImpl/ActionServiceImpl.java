@@ -92,7 +92,6 @@ public class ActionServiceImpl implements ActionService {
 		List<ViewRecord> recentRecords = viewRecordMapper.selectByExample(viewRecordExample);
 		if (recentRecords.size() != 0) {
 			// 当天已有浏览记录，不再记录
-			System.out.println(recentRecords.get(0).toString());
 			return false;
 		}
 		ViewRecord viewRecord = new ViewRecord();
