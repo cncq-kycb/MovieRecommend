@@ -1,5 +1,6 @@
 package cn.edu.cqu.Recommend.Service.ServiceImpl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -10,8 +11,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import cn.edu.cqu.Recommend.Dao.CinemaMapper;
 import cn.edu.cqu.Recommend.Dao.MovieInfoMapper;
 import cn.edu.cqu.Recommend.Dao.TimelySessionMapper;
+import cn.edu.cqu.Recommend.Pojo.Cinema;
+import cn.edu.cqu.Recommend.Pojo.CinemaExample;
+import cn.edu.cqu.Recommend.Pojo.CinemaSession;
 import cn.edu.cqu.Recommend.Pojo.MovieInfo;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoExample;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoWithBLOBs;
@@ -33,6 +38,8 @@ public class UserServiceImpl implements UserService {
 	MovieInfoMapper movieInfoMapper;
 	@Autowired
 	TimelySessionMapper timelySessionMapper;
+	@Autowired
+	CinemaMapper cinemaMapper;
 
 	@Override
 	public MyJson getUserInfo(HttpSession session) {
@@ -49,6 +56,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public MyJson getTimelySession(Integer movieId, String condition) {
 		TimelySessionExample timelySessionExample = new TimelySessionExample();
+		CinemaExample cinemaExample = new CinemaExample();
+		cinemaExample.or();
 		Date time_now = new Date();
 		if (condition.equals(TODAY)) {
 			// 查询今日有效电影场次
@@ -70,7 +79,18 @@ public class UserServiceImpl implements UserService {
 		}
 		try {
 			List<TimelySession> timelySessions = timelySessionMapper.selectByExample(timelySessionExample);
-			return new MyJson(true, timelySessions);
+			List<Cinema> cinemas = cinemaMapper.selectByExample(cinemaExample);
+			List<CinemaSession> cinemaSessions = new ArrayList<CinemaSession>();
+			for (Cinema cinema : cinemas) {
+				List<TimelySession> tempList = new ArrayList<TimelySession>();
+				for (TimelySession timelySession : timelySessions) {
+					if (cinema.getCinemaId().equals(timelySession.getCinemaId())) {
+						tempList.add(timelySession);
+					}
+				}
+				cinemaSessions.add(new CinemaSession(cinema, tempList));
+			}
+			return new MyJson(true, cinemaSessions);
 		} catch (Exception e) {
 			System.err.println(e);
 			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
