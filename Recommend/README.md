@@ -1,5 +1,4 @@
 # Movie Recommend
-## Description  
 A movie recommendation web system
 
 ---
