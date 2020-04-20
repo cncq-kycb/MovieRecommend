@@ -6,10 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.MergedAnnotations.SearchStrategy;
 import org.springframework.stereotype.Component;
 
+import cn.edu.cqu.Recommend.Dao.SearchRecordMapper;
 import cn.edu.cqu.Recommend.Dao.UserMapper;
 import cn.edu.cqu.Recommend.Dao.ViewRecordMapper;
+import cn.edu.cqu.Recommend.Pojo.SearchRecord;
 import cn.edu.cqu.Recommend.Pojo.User;
 import cn.edu.cqu.Recommend.Pojo.UserExample;
 import cn.edu.cqu.Recommend.Pojo.ViewRecord;
@@ -25,6 +28,8 @@ public class ActionServiceImpl implements ActionService {
 	UserMapper userMapper;
 	@Autowired
 	ViewRecordMapper viewRecordMapper;
+	@Autowired
+	SearchRecordMapper searchRecordMapper;
 
 	@Override
 	public MyJson login(User user, HttpSession session) {
@@ -84,6 +89,27 @@ public class ActionServiceImpl implements ActionService {
 		viewRecord.setViewRecordTime(new Date());
 		try {
 			viewRecordMapper.insert(viewRecord);
+			return true;
+		} catch (Exception e) {
+			System.err.println(e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean searchLog(HttpSession session, String input) {
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			// 未登录
+			return false;
+		}
+		SearchRecord searchRecord = new SearchRecord();
+		searchRecord.setSearchRecordItem(input);
+		searchRecord.setSearchRecordTime(new Date());
+		searchRecord.setUserId(user.getUserId());
+		searchRecord.setUserTel(user.getUserTel());
+		try {
+			searchRecordMapper.insert(searchRecord);
 			return true;
 		} catch (Exception e) {
 			System.err.println(e);

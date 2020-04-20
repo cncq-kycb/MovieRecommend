@@ -22,4 +22,7 @@ public interface ActionService {
 	// 记录浏览电影详情日志
 	boolean viewLog(HttpSession session, Integer movieId);
 
+	// 记录搜索电影日志
+	boolean searchLog(HttpSession session, String input);
+
 }
