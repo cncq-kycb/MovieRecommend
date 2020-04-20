@@ -10,6 +10,9 @@ import cn.edu.cqu.Recommend.Utils.MyJson;
 public interface UserService {
 
 	// 获取用户信息
-	MyJson getUserInfo(HttpSession session);
+	public MyJson getUserInfo(HttpSession session);
+
+	// 按日期条件获取电影场次信息
+	public MyJson getTimelySession(Integer movieId, String condition);
 
 }
