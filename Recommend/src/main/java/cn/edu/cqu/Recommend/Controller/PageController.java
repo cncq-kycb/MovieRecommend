@@ -48,4 +48,16 @@ public class PageController {
 		return "seacher";
 	}
 
+	// 跳转到今日电影场次
+	@RequestMapping("today_list.html")
+	public String todayList() {
+		return "today_list";
+	}
+
+	// 跳转到明日电影场次
+	@RequestMapping("tomorrow_list.html")
+	public String tomorrowList() {
+		return "tomorrow_list";
+	}
+
 }
