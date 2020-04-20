@@ -3,11 +3,8 @@ package cn.edu.cqu.Recommend.Dao;
 import cn.edu.cqu.Recommend.Pojo.ViewRecord;
 import cn.edu.cqu.Recommend.Pojo.ViewRecordExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface ViewRecordMapper {
     long countByExample(ViewRecordExample example);
 

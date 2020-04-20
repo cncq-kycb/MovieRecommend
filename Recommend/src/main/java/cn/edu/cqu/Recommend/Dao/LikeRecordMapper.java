@@ -3,11 +3,8 @@ package cn.edu.cqu.Recommend.Dao;
 import cn.edu.cqu.Recommend.Pojo.LikeRecord;
 import cn.edu.cqu.Recommend.Pojo.LikeRecordExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface LikeRecordMapper {
     long countByExample(LikeRecordExample example);
 
