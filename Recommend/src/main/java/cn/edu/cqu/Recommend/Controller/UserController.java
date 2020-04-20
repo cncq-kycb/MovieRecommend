@@ -34,6 +34,13 @@ public class UserController {
 		return userService.getMovies();
 	}
 
+	// 根据电影ID获取电影信息
+	@GetMapping(value = "/getMovie")
+	@ResponseBody
+	public MyJson getMovie(@RequestParam(required = true, value = "movieId") Integer movieId) {
+		return userService.getMovieById(movieId);
+	}
+
 	// 搜索电影信息
 	@GetMapping("searchMovie")
 	@ResponseBody
