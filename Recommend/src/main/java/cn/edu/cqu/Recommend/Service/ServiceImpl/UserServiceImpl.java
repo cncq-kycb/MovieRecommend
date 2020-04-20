@@ -103,4 +103,22 @@ public class UserServiceImpl implements UserService {
 			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
 		}
 	}
+
+	@Override
+	public MyJson getMovieById(Integer movieId) {
+		MovieInfoExample movieInfoExample = new MovieInfoExample();
+		movieInfoExample.or().andMovieIdEqualTo(movieId);
+		try {
+			List<MovieInfo> movieInfos = movieInfoMapper.selectByExample(movieInfoExample);
+			if (movieInfos.size() != 0) {
+				// 查到结果
+				return new MyJson(true, movieInfos.get(0));
+			}
+			// 无结果，防止传回空指针
+			return new MyJson(true, new MovieInfo());
+		} catch (Exception e) {
+			System.err.println(e);
+			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
+		}
+	}
 }

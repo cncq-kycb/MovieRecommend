@@ -20,5 +20,8 @@ public interface UserService {
 
 	// 按条件搜索电影信息
 	public MyJson searchMovie(String condition);
+	
+	// 根据电影ID获取电影信息
+	public MyJson getMovieById(Integer movieId);
 
 }
