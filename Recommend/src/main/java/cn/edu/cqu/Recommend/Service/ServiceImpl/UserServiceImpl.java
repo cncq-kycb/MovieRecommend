@@ -94,6 +94,15 @@ public class UserServiceImpl implements UserService {
 				}
 				cinemaSessions.add(new CinemaSession(cinema, tempList));
 			}
+			// 去掉无场次影院
+			Iterator<CinemaSession> iterator = cinemaSessions.iterator();
+			while (iterator.hasNext()) {
+				CinemaSession cinemaSession = iterator.next();
+				if (cinemaSession.getSessions().size() == 0) {
+					iterator.remove();
+					continue;
+				}
+			}
 			return new MyJson(true, cinemaSessions);
 		} catch (Exception e) {
 			System.err.println(e);
