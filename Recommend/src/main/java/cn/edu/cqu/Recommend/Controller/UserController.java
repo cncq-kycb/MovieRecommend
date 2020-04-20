@@ -44,7 +44,8 @@ public class UserController {
 	// 搜索电影信息
 	@GetMapping("searchMovie")
 	@ResponseBody
-	public MyJson searchMovie(@RequestParam(required = true, value = "input") String input) {
+	public MyJson searchMovie(@RequestParam(required = true, value = "input") String input, HttpSession session) {
+		actionService.searchLog(session, input);
 		return userService.searchMovie(input);
 	}
 
