@@ -67,4 +67,13 @@ public class UserController {
 		return userService.getTimelySession(movieId, "TOMORROW");
 	}
 
+	// 获取电影推荐
+	@GetMapping(value = "getRecommendMovies")
+	@ResponseBody
+	public MyJson getRecommendMovies(HttpSession session) {
+		// 随机推荐
+		return userService.getRecommendMovies();
+		// 数据推荐
+		// return userService.getRecommendMovies(session);
+	}
 }
