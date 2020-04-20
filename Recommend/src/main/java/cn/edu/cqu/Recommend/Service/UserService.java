@@ -18,4 +18,7 @@ public interface UserService {
 	// 获取全部电影信息
 	public MyJson getMovies();
 
+	// 按条件搜索电影信息
+	public MyJson searchMovie(String condition);
+
 }

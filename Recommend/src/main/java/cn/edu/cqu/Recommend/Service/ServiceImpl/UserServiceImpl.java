@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.cqu.Recommend.Dao.MovieInfoMapper;
 import cn.edu.cqu.Recommend.Dao.TimelySessionMapper;
+import cn.edu.cqu.Recommend.Pojo.MovieInfo;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoExample;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoWithBLOBs;
 import cn.edu.cqu.Recommend.Pojo.TimelySession;
@@ -83,6 +84,19 @@ public class UserServiceImpl implements UserService {
 		try {
 			List<MovieInfoWithBLOBs> movieInfoWithBLOBs = movieInfoMapper.selectByExampleWithBLOBs(movieInfoExample);
 			return new MyJson(true, movieInfoWithBLOBs);
+		} catch (Exception e) {
+			System.err.println(e);
+			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
+		}
+	}
+
+	@Override
+	public MyJson searchMovie(String condition) {
+		MovieInfoExample movieInfoExample = new MovieInfoExample();
+		movieInfoExample.or().andMovieNameLike(condition);
+		try {
+			List<MovieInfo> movieInfos = movieInfoMapper.selectByExample(movieInfoExample);
+			return new MyJson(true, movieInfos);
 		} catch (Exception e) {
 			System.err.println(e);
 			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
