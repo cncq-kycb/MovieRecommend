@@ -24,6 +24,13 @@ public class UserController {
 		return userService.getUserInfo(session);
 	}
 
+	// 获取全部电影信息
+	@GetMapping(value = "/getMovies")
+	@ResponseBody
+	public MyJson getMovies() {
+		return userService.getMovies();
+	}
+
 	// 获取今日电影场次信息
 	@GetMapping(value = "/getSessionInfoToday")
 	@ResponseBody
