@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.MergedAnnotations.SearchStrategy;
 import org.springframework.stereotype.Component;
 
 import cn.edu.cqu.Recommend.Dao.SearchRecordMapper;
