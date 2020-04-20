@@ -19,4 +19,7 @@ public interface ActionService {
 	// 注册服务
 	MyJson signup(User user);
 
+	// 记录浏览电影详情日志
+	boolean viewLog(HttpSession session, Integer movieId);
+
 }

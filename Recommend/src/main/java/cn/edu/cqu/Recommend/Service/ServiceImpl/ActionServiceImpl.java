@@ -1,5 +1,6 @@
 package cn.edu.cqu.Recommend.Service.ServiceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.edu.cqu.Recommend.Dao.UserMapper;
+import cn.edu.cqu.Recommend.Dao.ViewRecordMapper;
 import cn.edu.cqu.Recommend.Pojo.User;
 import cn.edu.cqu.Recommend.Pojo.UserExample;
+import cn.edu.cqu.Recommend.Pojo.ViewRecord;
 import cn.edu.cqu.Recommend.Service.ActionService;
 import cn.edu.cqu.Recommend.Utils.MyJson;
 import cn.edu.cqu.Recommend.Utils.Static.LogioStrings;
@@ -20,6 +23,8 @@ public class ActionServiceImpl implements ActionService {
 
 	@Autowired
 	UserMapper userMapper;
+	@Autowired
+	ViewRecordMapper viewRecordMapper;
 
 	@Override
 	public MyJson login(User user, HttpSession session) {
@@ -62,6 +67,27 @@ public class ActionServiceImpl implements ActionService {
 			// 注册失败
 			System.err.println(e);
 			return new MyJson(false, UserInfoStrings.SIGNUP_FAILED);
+		}
+	}
+
+	@Override
+	public boolean viewLog(HttpSession session, Integer movieId) {
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			// 未登录
+			return false;
+		}
+		ViewRecord viewRecord = new ViewRecord();
+		viewRecord.setMovieId(movieId);
+		viewRecord.setUserId(user.getUserId());
+		viewRecord.setUserTel(user.getUserTel());
+		viewRecord.setViewRecordTime(new Date());
+		try {
+			viewRecordMapper.insert(viewRecord);
+			return true;
+		} catch (Exception e) {
+			System.err.println(e);
+			return false;
 		}
 	}
 
