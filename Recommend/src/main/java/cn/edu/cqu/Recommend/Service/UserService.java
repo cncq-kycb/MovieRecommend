@@ -15,4 +15,7 @@ public interface UserService {
 	// 按日期条件获取电影场次信息
 	public MyJson getTimelySession(Integer movieId, String condition);
 
+	// 获取全部电影信息
+	public MyJson getMovies();
+
 }
