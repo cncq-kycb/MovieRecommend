@@ -266,7 +266,7 @@
 	</update>
 
 	<select id="randomRecommend"
-		resultType="cn.edu.cqu.Recommend.Pojo.MovieInfoWithBLOBs">
+		resultMap="ResultMapWithBLOBs">
 		select *
 		from movie_info ORDER BY RAND() limit 5
 	</select>
