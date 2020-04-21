@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import cn.edu.cqu.Recommend.Dao.CinemaMapper;
 import cn.edu.cqu.Recommend.Dao.MovieInfoMapper;
 import cn.edu.cqu.Recommend.Dao.TimelySessionMapper;
@@ -111,12 +114,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public MyJson getMovies() {
+	public MyJson getMovies(int pageNum, int pageSize) {
 		MovieInfoExample movieInfoExample = new MovieInfoExample();
 		movieInfoExample.or();
 		try {
-			List<MovieInfoWithBLOBs> movieInfoWithBLOBs = movieInfoMapper.selectByExampleWithBLOBs(movieInfoExample);
-			return new MyJson(true, movieInfoWithBLOBs);
+			PageHelper.startPage(pageNum, pageSize);
+			PageInfo<MovieInfoWithBLOBs> pageInfo = new PageInfo<MovieInfoWithBLOBs>(
+					movieInfoMapper.selectByExampleWithBLOBs(movieInfoExample));
+			return new MyJson(true, pageInfo);
 		} catch (Exception e) {
 			System.err.println(e);
 			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);

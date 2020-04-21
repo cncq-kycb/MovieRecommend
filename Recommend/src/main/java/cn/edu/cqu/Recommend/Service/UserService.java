@@ -16,7 +16,7 @@ public interface UserService {
 	public MyJson getTimelySession(Integer movieId, String condition);
 
 	// 获取全部电影信息
-	public MyJson getMovies();
+	public MyJson getMovies(int pageNum, int pageSize);
 
 	// 按条件搜索电影信息
 	public MyJson searchMovie(String condition);
