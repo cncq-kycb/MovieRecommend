@@ -17,6 +17,7 @@ import com.github.pagehelper.PageInfo;
 
 import cn.edu.cqu.Recommend.Dao.CinemaMapper;
 import cn.edu.cqu.Recommend.Dao.MovieInfoMapper;
+import cn.edu.cqu.Recommend.Dao.TimelyMovieMapper;
 import cn.edu.cqu.Recommend.Dao.TimelySessionMapper;
 import cn.edu.cqu.Recommend.Pojo.Cinema;
 import cn.edu.cqu.Recommend.Pojo.CinemaExample;
@@ -24,6 +25,7 @@ import cn.edu.cqu.Recommend.Pojo.CinemaSession;
 import cn.edu.cqu.Recommend.Pojo.MovieInfo;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoExample;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoWithBLOBs;
+import cn.edu.cqu.Recommend.Pojo.TimelyMovieExample;
 import cn.edu.cqu.Recommend.Pojo.TimelySession;
 import cn.edu.cqu.Recommend.Pojo.TimelySessionExample;
 import cn.edu.cqu.Recommend.Pojo.User;
@@ -39,11 +41,13 @@ public class UserServiceImpl implements UserService {
 	private final String TOMORROW = "TOMORROW";
 
 	@Autowired
+	CinemaMapper cinemaMapper;
+	@Autowired
 	MovieInfoMapper movieInfoMapper;
 	@Autowired
-	TimelySessionMapper timelySessionMapper;
+	TimelyMovieMapper timelyMovieMapper;
 	@Autowired
-	CinemaMapper cinemaMapper;
+	TimelySessionMapper timelySessionMapper;
 
 	@Override
 	public MyJson getUserInfo(HttpSession session) {
@@ -161,12 +165,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public MyJson getRecommendMovies(HttpSession session) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public MyJson getRecommendMovies() {
 		try {
 			List<MovieInfoWithBLOBs> movieInfoWithBLOBs = movieInfoMapper.randomRecommend();
@@ -175,5 +173,24 @@ public class UserServiceImpl implements UserService {
 			System.err.println(e);
 			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
 		}
+	}
+
+	@Override
+	public MyJson getTimelyMovie() {
+		TimelyMovieExample timelyMovieExample = new TimelyMovieExample();
+		timelyMovieExample.or();
+		try {
+			return new MyJson(true, timelyMovieMapper.selectByExample(timelyMovieExample));
+		} catch (Exception e) {
+			System.err.println(e);
+			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
+		}
+	}
+
+	// TODO: 推荐算法实现
+	@Override
+	public MyJson getRecommendMovies(HttpSession session) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

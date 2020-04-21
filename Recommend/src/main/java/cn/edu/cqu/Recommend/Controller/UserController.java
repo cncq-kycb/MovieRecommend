@@ -35,6 +35,13 @@ public class UserController {
 		return userService.getMovies(pageNum, pageSize);
 	}
 
+	// 获取有场次电影信息
+	@GetMapping(value = "/getTimelyMovie")
+	@ResponseBody
+	public MyJson getTimelyMovie() {
+		return userService.getTimelyMovie();
+	}
+
 	// 根据电影ID获取电影信息
 	@GetMapping(value = "/getMovie")
 	@ResponseBody
