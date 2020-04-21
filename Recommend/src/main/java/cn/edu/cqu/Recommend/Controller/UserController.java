@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.edu.cqu.Recommend.Service.ActionService;
 import cn.edu.cqu.Recommend.Service.UserService;
 import cn.edu.cqu.Recommend.Utils.MyJson;
+import cn.edu.cqu.Recommend.Utils.Static.LogioStrings;
 
 @RestController
 public class UserController {
@@ -45,7 +46,11 @@ public class UserController {
 	// 根据电影ID获取电影信息
 	@GetMapping(value = "/getMovie")
 	@ResponseBody
-	public MyJson getMovie(@RequestParam(required = true, value = "movieId") Integer movieId) {
+	public MyJson getMovie(@RequestParam(required = true, value = "movieId") Integer movieId, HttpSession session) {
+		if (session.getAttribute("user") == null) {
+			// 未登录
+			return new MyJson(true, LogioStrings.NOT_LOGIN);
+		}
 		return userService.getMovieById(movieId);
 	}
 
@@ -62,6 +67,10 @@ public class UserController {
 	@ResponseBody
 	public MyJson getSessionInfoToday(@RequestParam(required = true, value = "movieId") Integer movieId,
 			HttpSession session) {
+		if (session.getAttribute("user") == null) {
+			// 未登录
+			return new MyJson(true, LogioStrings.NOT_LOGIN);
+		}
 		actionService.viewLog(session, movieId);
 		return userService.getTimelySession(movieId, "TODAY");
 	}
@@ -71,6 +80,10 @@ public class UserController {
 	@ResponseBody
 	public MyJson getSessionInfoTomorrow(@RequestParam(required = true, value = "movieId") Integer movieId,
 			HttpSession session) {
+		if (session.getAttribute("user") == null) {
+			// 未登录
+			return new MyJson(true, LogioStrings.NOT_LOGIN);
+		}
 		actionService.viewLog(session, movieId);
 		return userService.getTimelySession(movieId, "TOMORROW");
 	}
