@@ -17,10 +17,11 @@ A movie recommendation web system
 * 购票跳转
 
 ---
-## Related Framework
-Front-end development: BootStrap and AJAX
-
-Back-end development: Springboot and Scrapy, Mybatis for generating POJO and DAO codes
+## Related work
+* Front-end development: BootStrap and AJAX
+* Back-end development: Springboot and Scrapy, Mybatis for generating POJO and DAO codes
+* Data interaction: MyJson which is defined in *cn.edu.cqu.Recommend.Utils*
+* Code generator: Mybatis generator which is defined in *cn.edu.cqu.Recommend.Utils.Generator*
 
 ---
 ## Environment
