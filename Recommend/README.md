@@ -20,7 +20,7 @@ A movie recommendation web system
 ## Related work
 * Front-end development: BootStrap and AJAX
 * Back-end development: Springboot and Scrapy, Mybatis for generating POJO and DAO codes
-* Data interaction: MyJson which is defined in *cn.edu.cqu.Recommend.Utils*
+* Data carrier: MyJson which is defined in *cn.edu.cqu.Recommend.Utils*
 * Code generator: Mybatis generator which is defined in *cn.edu.cqu.Recommend.Utils.Generator*
 
 ---
