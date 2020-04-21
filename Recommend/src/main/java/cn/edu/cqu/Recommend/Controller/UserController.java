@@ -30,8 +30,9 @@ public class UserController {
 	// 获取全部电影信息
 	@GetMapping(value = "/getMovies")
 	@ResponseBody
-	public MyJson getMovies() {
-		return userService.getMovies();
+	public MyJson getMovies(@RequestParam(required = true, value = "pageNum", defaultValue = "1") int pageNum,
+			@RequestParam(required = false, value = "pageSize", defaultValue = "5") int pageSize) {
+		return userService.getMovies(pageNum, pageSize);
 	}
 
 	// 根据电影ID获取电影信息
