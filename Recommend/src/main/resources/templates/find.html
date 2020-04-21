@@ -12,14 +12,17 @@
 <script type="text/javascript" src="js/banner.js"></script>
 <script type="text/javascript" src="js/tab.js"></script>
 <script type="text/javascript">
-	var action = "/getMovies";
+	var pageNum = 1;
+	var pages = -1;
+	var action = "/getMovies?pageNum=";
 	$.get(
-					action,
+					action+pageNum,
 					function(data) {
 						if(data.success==true){
+							pages = data.message.pages;
 						var old = '';
-						for(i in data.message){
-							var item = data.message[i];
+						for(i in data.message.list){
+							var item = data.message.list[i];
 							old += '<a href="today_list.html?movieId='
 							+ item.movieId
 							+'" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
@@ -34,11 +37,191 @@
 							+ item.actor
 							+'</h3></div><div class="aui-film-button"><button>购票</button></div></a>';
 						}
+						if(data.message.pages==1){
+			
+						}else{
+							old+='<h3>&ensp;</h3><center><div class="scott"><span class="disabled"></span><span><a href="javascript:void(0);" onclick="firstPage()">首页</a></span>';
+							if(data.message.hasPreviousPage){
+								old+='<span><span> <a href="javascript:void(0);" onclick="previousPage()">上一页&ensp;</a></span></span>'
+							}
+							if(data.message.hasNextPage){
+								old+='<span><span> <a href="javascript:void(0);" onclick="nextPage()">下一页&ensp;</a></span></span>'
+							}
+							old+='<span><a href="javascript:void(0);" onclick="lastPage()">尾页</a></span></div></center>'
+						}
 							$("#onMovies").html(old);	
 						}else{
 							alert('err back')
 						}
 					});
+	function firstPage(){
+		pageNum=1;
+		$.get(
+				action+pageNum,
+				function(data) {
+					if(data.success==true){
+						pages = data.message.pages;
+					var old = '';
+					for(i in data.message.list){
+						var item = data.message.list[i];
+						old += '<a href="today_list.html?movieId='
+						+ item.movieId
+						+'" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
+						+ item.movieImage
+						+ '" alt=""></div><div class="aui-flex-box"><h1>'
+						+ item.movieName
+						+'</h1><h2>豆瓣评分 <em>'
+						+ item.movieRate
+						+'</em></h2><h3>导演：'
+						+ item.director
+						+'</h3><h3>主演：'
+						+ item.actor
+						+'</h3></div><div class="aui-film-button"><button>购票</button></div></a>';
+					}
+					if(data.message.pages==1){
+		
+					}else{
+						old+='<h3>&ensp;</h3><center><div class="scott"><span class="disabled"></span><span><a href="javascript:void(0);" onclick="firstPage()">首页</a></span>';
+						if(data.message.hasPreviousPage){
+							old+='<span><span> <a href="javascript:void(0);" onclick="previousPage()">上一页&ensp;</a></span></span>'
+						}
+						if(data.message.hasNextPage){
+							old+='<span><span> <a href="javascript:void(0);" onclick="nextPage()">下一页&ensp;</a></span></span>'
+						}
+						old+='<span><a href="javascript:void(0);" onclick="lastPage()">尾页</a></span></div></center>'
+					}
+						$("#onMovies").html(old);	
+					}else{
+						alert('err back')
+					}
+				});
+	}
+	function previousPage(){
+		pageNum-=1;
+		$.get(
+				action+pageNum,
+				function(data) {
+					if(data.success==true){
+						pages = data.message.pages;
+					var old = '';
+					for(i in data.message.list){
+						var item = data.message.list[i];
+						old += '<a href="today_list.html?movieId='
+						+ item.movieId
+						+'" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
+						+ item.movieImage
+						+ '" alt=""></div><div class="aui-flex-box"><h1>'
+						+ item.movieName
+						+'</h1><h2>豆瓣评分 <em>'
+						+ item.movieRate
+						+'</em></h2><h3>导演：'
+						+ item.director
+						+'</h3><h3>主演：'
+						+ item.actor
+						+'</h3></div><div class="aui-film-button"><button>购票</button></div></a>';
+					}
+					if(data.message.pages==1){
+		
+					}else{
+						old+='<h3>&ensp;</h3><center><div class="scott"><span class="disabled"></span><span><a href="javascript:void(0);" onclick="firstPage()">首页</a></span>';
+						if(data.message.hasPreviousPage){
+							old+='<span><span> <a href="javascript:void(0);" onclick="previousPage()">上一页&ensp;</a></span></span>'
+						}
+						if(data.message.hasNextPage){
+							old+='<span><span> <a href="javascript:void(0);" onclick="nextPage()">下一页&ensp;</a></span></span>'
+						}
+						old+='<span><a href="javascript:void(0);" onclick="lastPage()">尾页</a></span></div></center>'
+					}
+						$("#onMovies").html(old);	
+					}else{
+						alert('err back')
+					}
+				});
+	}
+	function nextPage(){
+		pageNum+=1;
+		$.get(
+				action+pageNum,
+				function(data) {
+					if(data.success==true){
+						pages = data.message.pages;
+					var old = '';
+					for(i in data.message.list){
+						var item = data.message.list[i];
+						old += '<a href="today_list.html?movieId='
+						+ item.movieId
+						+'" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
+						+ item.movieImage
+						+ '" alt=""></div><div class="aui-flex-box"><h1>'
+						+ item.movieName
+						+'</h1><h2>豆瓣评分 <em>'
+						+ item.movieRate
+						+'</em></h2><h3>导演：'
+						+ item.director
+						+'</h3><h3>主演：'
+						+ item.actor
+						+'</h3></div><div class="aui-film-button"><button>购票</button></div></a>';
+					}
+					if(data.message.pages==1){
+		
+					}else{
+						old+='<h3>&ensp;</h3><center><div class="scott"><span class="disabled"></span><span><a href="javascript:void(0);" onclick="firstPage()">首页</a></span>';
+						if(data.message.hasPreviousPage){
+							old+='<span><span> <a href="javascript:void(0);" onclick="previousPage()">上一页&ensp;</a></span></span>'
+						}
+						if(data.message.hasNextPage){
+							old+='<span><span> <a href="javascript:void(0);" onclick="nextPage()">下一页&ensp;</a></span></span>'
+						}
+						old+='<span><a href="javascript:void(0);" onclick="lastPage()">尾页</a></span></div></center>'
+					}
+						$("#onMovies").html(old);	
+					}else{
+						alert('err back')
+					}
+				});
+	}
+	function lastPage(){
+		pageNum = pages;
+		$.get(
+				action+pageNum,
+				function(data) {
+					if(data.success==true){
+						pages = data.message.pages;
+					var old = '';
+					for(i in data.message.list){
+						var item = data.message.list[i];
+						old += '<a href="today_list.html?movieId='
+						+ item.movieId
+						+'" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
+						+ item.movieImage
+						+ '" alt=""></div><div class="aui-flex-box"><h1>'
+						+ item.movieName
+						+'</h1><h2>豆瓣评分 <em>'
+						+ item.movieRate
+						+'</em></h2><h3>导演：'
+						+ item.director
+						+'</h3><h3>主演：'
+						+ item.actor
+						+'</h3></div><div class="aui-film-button"><button>购票</button></div></a>';
+					}
+					if(data.message.pages==1){
+		
+					}else{
+						old+='<h3>&ensp;</h3><center><div class="scott"><span class="disabled"></span><span><a href="javascript:void(0);" onclick="firstPage()">首页</a></span>';
+						if(data.message.hasPreviousPage){
+							old+='<span><span> <a href="javascript:void(0);" onclick="previousPage()">上一页&ensp;</a></span></span>'
+						}
+						if(data.message.hasNextPage){
+							old+='<span><span> <a href="javascript:void(0);" onclick="nextPage()">下一页&ensp;</a></span></span>'
+						}
+						old+='<span><a href="javascript:void(0);" onclick="lastPage()">尾页</a></span></div></center>'
+					}
+						$("#onMovies").html(old);	
+					}else{
+						alert('err back')
+					}
+				});
+	}
 </script>
 </head>
 
