@@ -24,6 +24,9 @@ function sender(){
 					}else{
 				for(i in data.message){
 					var item = data.message[i];
+					if((item.movieRate + '').indexOf('.') == -1){
+						item.movieRate+='.0';
+					}
 					old += '<a href="today_list.html?movieId='
 					+ item.movieId
 					+'" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'

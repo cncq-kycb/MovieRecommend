@@ -133,6 +133,9 @@ a {
 					if(data.success==true){
 					var old2 = '';
 						var item = data.message;
+						if((item.movieRate + '').indexOf('.') == -1){
+							item.movieRate+='.0';
+						}
 						old2 += '<a href="#" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
 						+ item.movieImage
 						+'" alt=""></div><div class="aui-flex-box"><h1>'
