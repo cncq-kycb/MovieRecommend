@@ -11,8 +11,36 @@
 <script src="js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="js/banner.js"></script>
 <script type="text/javascript" src="js/tab.js"></script>
+<script type="text/javascript">
+	var action = "/getRecommendMovies";
+	$.get(
+					action,
+					function(data) {
+						if(data.success==true){
+						var old = '';
+						for(i in data.message){
+							var item = data.message[i];
+							old += '<a href="today_list.html?movieId='
+							+ item.movieId
+							+'" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
+							+ item.movieImage
+							+ '" alt=""></div><div class="aui-flex-box"><h1>'
+							+ item.movieName
+							+'</h1><h2>豆瓣评分 <em>'
+							+ item.movieRate
+							+'</em></h2><h3>导演：'
+							+ item.director
+							+'</h3><h3>主演：'
+							+ item.actor
+							+'</h3></div><div class="aui-film-button"><button>购票</button></div></a>';
+						}
+							$("#recommendMovies").html(old);	
+						}else{
+							alert('err back')
+						}
+					});
+</script>
 </head>
-
 <body>
 <div class="topssbox1">
 <div class="topss">
@@ -23,10 +51,7 @@
   </a>
 </div>
 </div>
-
        <img src="images/huamulan.png"/>
-
-
 <h4>&ensp;</h4>
  <div class="mypart4">
   <img src="images/my15.png" />
@@ -34,121 +59,7 @@
 
         <section class="aui-scrollView">
             <div class="tab-panel">
-                <div class="tab-panel-item tab-active">
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-001.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h2>豆瓣评分 <em>9.5</em></h2>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-                        <div class="aui-film-button">
-                            <button>购票</button>
-                        </div>
-                    </a>
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-002.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h2>豆瓣评分 <em>9.5</em></h2>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-                        <div class="aui-film-button">
-                            <button>购票</button>
-                        </div>
-                    </a>
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-003.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h2>豆瓣评分 <em>9.5</em></h2>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-                        <div class="aui-film-button">
-                            <button>购票</button>
-                        </div>
-                    </a>
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-004.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h2>豆瓣评分 <em>9.5</em></h2>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-                        <div class="aui-film-button">
-                            <button>购票</button>
-                        </div>
-                    </a>
-                </div>
-                <div class="tab-panel-item">
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-002.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h2>豆瓣评分 <em>9.5</em></h2>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-                        <div class="aui-film-button">
-                            <button>购票</button>
-                        </div>
-                    </a>
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-003.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h2>豆瓣评分 <em>9.5</em></h2>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-                        <div class="aui-film-button">
-                            <button>购票</button>
-                        </div>
-                    </a>
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-004.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h2>豆瓣评分 <em>9.5</em></h2>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-                        <div class="aui-film-button">
-                            <button>购票</button>
-                        </div>
-                    </a>
-                    <a href="" type="" about="" class="aui-flex b-line">
-                        <div class="aui-film-img">
-                            <img src="images/film-ad-001.jpg" alt="">
-                        </div>
-                        <div class="aui-flex-box">
-                            <h1>流浪地球</h1>
-                            <h2>豆瓣评分 <em>9.5</em></h2>
-                            <h3>导演:李嘉桦</h3>
-                            <h3>主演:无言 曲龙 李小萌</h3>
-                        </div>
-                        <div class="aui-film-button">
-                            <button>购票</button>
-                        </div>
-                    </a>
+                <div class="tab-panel-item tab-active" id="recommendMovies">
                 </div>
             </div>
             <div style="height:55px;"></div>
