@@ -113,7 +113,7 @@ a {
  	color: #FFF;
  }
 </style>
-
+<script type="text/javascript" src="js/WebP.js"></script>
 <script src="js/jquery-1.8.1.min.js"></script>
 <script src="js/index.js" reload="1"></script>
 <script type="text/javascript">
@@ -136,8 +136,8 @@ a {
 						if((item.movieRate + '').indexOf('.') == -1){
 							item.movieRate+='.0';
 						}
-						old2 += '<a href="#" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="'
-						+ item.movieImage
+						old2 += '<a href="#" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="https://images.weserv.nl/?url='
+							+ item.movieImage.slice(7)
 						+'" alt=""></div><div class="aui-flex-box"><h1>'
 						+ item.movieName
 						+'</h1><h2>豆瓣评分 <em>'
