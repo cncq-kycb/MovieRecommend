@@ -17,6 +17,7 @@ import com.github.pagehelper.PageInfo;
 
 import cn.edu.cqu.Recommend.Dao.CinemaMapper;
 import cn.edu.cqu.Recommend.Dao.MovieInfoMapper;
+import cn.edu.cqu.Recommend.Dao.MovieInfoRecommendMapper;
 import cn.edu.cqu.Recommend.Dao.TimelyMovieMapper;
 import cn.edu.cqu.Recommend.Dao.TimelySessionMapper;
 import cn.edu.cqu.Recommend.Pojo.Cinema;
@@ -24,6 +25,8 @@ import cn.edu.cqu.Recommend.Pojo.CinemaExample;
 import cn.edu.cqu.Recommend.Pojo.CinemaSession;
 import cn.edu.cqu.Recommend.Pojo.MovieInfo;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoExample;
+import cn.edu.cqu.Recommend.Pojo.MovieInfoRecommendExample;
+import cn.edu.cqu.Recommend.Pojo.MovieInfoRecommendWithBLOBs;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoWithBLOBs;
 import cn.edu.cqu.Recommend.Pojo.TimelyMovieExample;
 import cn.edu.cqu.Recommend.Pojo.TimelySession;
@@ -48,6 +51,8 @@ public class UserServiceImpl implements UserService {
 	TimelyMovieMapper timelyMovieMapper;
 	@Autowired
 	TimelySessionMapper timelySessionMapper;
+	@Autowired
+	MovieInfoRecommendMapper movieInfoRecommendMapper;
 
 	@Override
 	public MyJson getUserInfo(HttpSession session) {
@@ -190,7 +195,21 @@ public class UserServiceImpl implements UserService {
 	// TODO: 推荐算法实现
 	@Override
 	public MyJson getRecommendMovies(HttpSession session) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = (User) session.getAttribute("user");
+		MovieInfoRecommendExample movieInfoRecommendExample = new MovieInfoRecommendExample();
+		movieInfoRecommendExample.or().andUserIdEqualTo(user.getUserId());
+		try {
+			List<MovieInfoRecommendWithBLOBs> movieInfoRecommendWithBLOBs = movieInfoRecommendMapper
+					.selectByExampleWithBLOBs(movieInfoRecommendExample);
+			if (movieInfoRecommendWithBLOBs.size() == 0) {
+				// 冷启动用户随机推荐
+				return getRecommendMovies();
+			}
+			return new MyJson(true, movieInfoRecommendWithBLOBs);
+		} catch (Exception e) {
+			System.err.println(e);
+			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
+		}
+
 	}
 }

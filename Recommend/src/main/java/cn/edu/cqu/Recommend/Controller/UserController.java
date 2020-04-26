@@ -93,8 +93,8 @@ public class UserController {
 	@ResponseBody
 	public MyJson getRecommendMovies(HttpSession session) {
 		// 随机推荐
-		return userService.getRecommendMovies();
+		// return userService.getRecommendMovies();
 		// 数据推荐
-		// return userService.getRecommendMovies(session);
+		return userService.getRecommendMovies(session);
 	}
 }
