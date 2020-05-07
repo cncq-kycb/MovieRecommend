@@ -196,6 +196,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public MyJson getRecommendMovies(HttpSession session) {
 		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			return getRecommendMovies();
+		}
 		MovieInfoRecommendExample movieInfoRecommendExample = new MovieInfoRecommendExample();
 		movieInfoRecommendExample.or().andUserIdEqualTo(user.getUserId());
 		try {
