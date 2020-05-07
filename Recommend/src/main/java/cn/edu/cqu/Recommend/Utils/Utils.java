@@ -18,10 +18,8 @@ public class Utils {
 				line = br.readLine();
 				sb.append(line + "\n");
 			}
-			if (process.waitFor() == 0) {
-				return "Call function success";
-			}
-			return "Call function failed";
+			System.out.println(sb.toString());
+			return "Call function success";
 		} catch (IOException e) {
 			System.err.println(e);
 		}

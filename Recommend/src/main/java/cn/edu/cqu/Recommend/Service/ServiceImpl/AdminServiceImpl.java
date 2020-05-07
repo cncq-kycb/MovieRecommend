@@ -64,10 +64,10 @@ public class AdminServiceImpl implements AdminService {
 	// 演示用每隔1000 * n秒执行一次任务
 	@Scheduled(fixedDelay = 1000 * 10)
 	private void scheduledSpiderTask() throws InterruptedException {
-		if (this.timerSwitchRecommend == true) {
+		if (this.timerSwitchSpider == true) {
 			// TODO: 插入定时任务
 			String[] argv = new String[] { "/Users/alberto/anaconda3/bin/python",
-					"./src/main/resources/Script/spider/.py", this.recommendSize + "" };
+					"./src/main/resources/Script/spider/getMovieInfo.py"};
 			String result;
 			try {
 				result = Utils.cmdCall(argv);
