@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<meta name="renderer" content="webkit"/>
+<meta name="force-rendering" content="webkit"/>
+<script>/*@cc_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @*/</script>
+<title></title>
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<script src="js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="js/banner.js"></script>
+<script type="text/javascript" src="js/tab.js"></script>
+<script type="text/javascript" src="js/WebP.js"></script>
+<script type="text/javascript">
+	var action = "getFavorite";
+	$.get(
+					action,
+					function(data) {
+						if(data.success==true){
+						
+						for(i in data.message){
+							var movieId = data.message[i].movieId;
+							$.get(
+									"getMovie?movieId="+movieId,
+									function(data) {
+										var item = data.message;
+									
+							
+							if((item.movieRate + '').indexOf('.') == -1){
+								item.movieRate+='.0';
+							}
+							 
+							 var old = '<a href="today_list.html?movieId='
+								+ item.movieId
+								+'" type="" about="" class="aui-flex b-line"><div class="aui-film-img"><img src="https://images.weserv.nl/?url='
+								+ item.movieImage.slice(7)
+								+ '" alt=""></div><div class="aui-flex-box"><h1>'
+								+ item.movieName
+								+'</h1><h2>豆瓣评分 <em>'
+								+ item.movieRate
+								+'</em></h2><h3>导演：'
+								+ item.director
+								+'</h3><h3>主演：'
+								+ item.actor
+								+'</h3></div><div class="aui-film-button"><button>购票</button></div></a>';
+							
+							$("#recommendMovies").append(old);
+									});
+						}
+	
+						}else{
+							alert('err back')
+						}
+					});
+</script>
+</head>
+<body>
+<div class="headerbox">
+  <div class="header">
+    <div class="headerL">
+      <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png" /></a>
+    </div>
+    <div class="headerC">
+      <p>我的收藏</p>
+    </div>
+    <div class="headerR"></div>
+  </div>
+</div>
+<h1>&ensp;</h1>
+
+        <section class="aui-scrollView">
+            <div class="tab-panel">
+                <div class="tab-panel-item tab-active" id="recommendMovies">
+                </div>
+            </div>
+            <div style="height:55px;"></div>
+        </section>
+
+<div class="fbox"></div>
+<div class="footbox">
+  <div class="footer">
+    <ul>
+      <li style="width:33%">
+        <a href="index.html">
+          <img src="images/f01.png" />
+          <p>首页</p>
+        </a>
+      </li>
+      <li style="width:33%">
+        <a href="find.html">
+          <img src="images/f02.png" />
+          <p>发现</p>
+        </a>
+      </li>
+      <li  class="on" style="width:33%">
+        <a href="my.html">
+          <img src="images/f4.png" />
+          <p>我的</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
