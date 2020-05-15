@@ -29,8 +29,29 @@ class Recommend:
         # self.type_count_num = 0
         # 推荐结果
         self.recommend_result = []
-        
-    # 获取数据库内相关数据
+
+    def get_like_record(self):
+        cursor = self.db.cursor()
+        sql = ('SELECT movie_info_data.movie_id,movie_info_data.movie_type_ids '
+                'FROM movie_info_data '
+	            'JOIN like_record ON like_record.movie_id = movie_info_data.movie_id '
+                'AND like_record.movie_id = movie_info_data.movie_id '
+                'WHERE like_record.user_id = %d' % self.user_id)
+        try:
+            cursor.execute(sql)
+        except:
+            print('Database err:'+ sql)
+            return
+        like_movie_list = []
+        for row in cursor.fetchall():
+            like_movie_list.append(row[0])
+            for type_id in row[1].split(','):
+                if type_id in self.type_prefer:
+                    self.type_prefer[type_id] += 3
+                else:
+                    self.type_prefer[type_id] = 3
+
+    # 获取数据库内浏览相关数据
     def get_view_record(self):
         cursor = self.db.cursor()
         sql = ('SELECT movie_info_data.movie_id,movie_info_data.movie_type_ids '
@@ -90,6 +111,9 @@ class Recommend:
             for movie_type_id in movie_type_ids:
                 if movie_type_id in self.type_prefer:
                     score += self.type_prefer[movie_type_id]
+            # 无效推荐
+            if score == 0:
+                continue
             # TopK计算
             if len(movies) < self.top_k:
                 movies[movie_id] = score
@@ -125,7 +149,7 @@ class RecommendSys:
         self.db = MySQLdb.connect(host=config.HOST, user=config.USER,password=config.PASSWORD,db=config.DATABASE,port=config.PORT, charset='utf8')
         cursor = self.db.cursor()
         self.user_ids = []
-        sql = 'SELECT DISTINCT user_id FROM view_record'
+        sql = 'SELECT DISTINCT user_id FROM view_record UNION SELECT DISTINCT user_id FROM like_record'
         try:
             cursor.execute(sql)
         except:
@@ -136,6 +160,7 @@ class RecommendSys:
     def recommend_task(self):
         for user_id in self.user_ids:
             recommd = Recommend(user_id, self.recommend_size, self.db)
+            recommd.get_like_record()
             recommd.get_view_record()
             recommd.recommend_start()
             if not recommd.save_recommend():
