@@ -135,4 +135,16 @@ public class UserController {
 		}
 		return userService.getFavorite(user);
 	}
+
+	// 判断是否为已收藏
+	@GetMapping(value = "isFavorite")
+	@ResponseBody
+	public MyJson isFavorite(@RequestParam(required = true, value = "movieId") Integer movieId, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			// 未登录
+			return new MyJson(true, LogioStrings.NOT_LOGIN);
+		}
+		return userService.isFavorite(movieId, user);
+	}
 }

@@ -42,4 +42,7 @@ public interface UserService {
 	// 获取收藏列表
 	public MyJson getFavorite(User user);
 
+	// 判断是否已收藏
+	public MyJson isFavorite(Integer movieId, User user);
+
 }

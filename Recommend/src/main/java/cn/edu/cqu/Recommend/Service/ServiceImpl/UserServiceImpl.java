@@ -185,6 +185,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public MyJson isFavorite(Integer movieId, User user) {
+		LikeRecordExample likeRecordExample = new LikeRecordExample();
+		likeRecordExample.or().andUserIdEqualTo(user.getUserId()).andMovieIdEqualTo(movieId);
+		try {
+			List<LikeRecord> likeRecords = likeRecordMapper.selectByExample(likeRecordExample);
+			// 已收藏
+			if (likeRecords.size() != 0) {
+				return new MyJson(true, true);
+			}
+			// 未收藏
+			return new MyJson(true, false);
+		} catch (Exception e) {
+			System.err.println(e);
+			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
+		}
+	}
+
+	@Override
 	public MyJson searchMovie(String condition) {
 		condition = "%" + condition + "%";
 		MovieInfoExample movieInfoExample = new MovieInfoExample();
