@@ -159,9 +159,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public MyJson removeFavorite(User user) {
+	public MyJson removeFavorite(Integer movieId, User user) {
 		LikeRecordExample likeRecordExample = new LikeRecordExample();
-		likeRecordExample.or().andUserIdEqualTo(user.getUserId());
+		likeRecordExample.or().andUserIdEqualTo(user.getUserId()).andMovieIdEqualTo(movieId);
 		try {
 			likeRecordMapper.deleteByExample(likeRecordExample);
 			return new MyJson(true, "取消收藏成功");

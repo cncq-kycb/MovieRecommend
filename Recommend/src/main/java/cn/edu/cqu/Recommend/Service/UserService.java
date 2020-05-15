@@ -37,7 +37,7 @@ public interface UserService {
 	public MyJson addFavorite(Integer movieId, User user);
 
 	// 取消收藏
-	public MyJson removeFavorite(User user);
+	public MyJson removeFavorite(Integer movieId, User user);
 
 	// 获取收藏列表
 	public MyJson getFavorite(User user);

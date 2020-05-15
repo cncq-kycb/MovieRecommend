@@ -121,7 +121,7 @@ public class UserController {
 			// 未登录
 			return new MyJson(true, LogioStrings.NOT_LOGIN);
 		}
-		return userService.removeFavorite(user);
+		return userService.removeFavorite(movieId, user);
 	}
 
 	// 获取收藏列表
