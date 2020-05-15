@@ -152,6 +152,66 @@ a {
 						alert('err back')
 					}
 				});
+	var action = "isFavorite?movieId="+movieId;
+	$.get(
+			action,
+				function(data) {
+					if(data.success==true){
+						var old3 = '';
+						if(data.message==true){
+							old3 = '<a class="a2 sizetype" href="javascript:void(0);" onclick="removeFavorite()" >取消收藏</a><a href="index.html"class="a1 sizetype">返回首页</a>'
+								$("#favorite").html(old3);
+						}
+							
+					}else{
+						alert('err back')
+					}
+				});
+	function addFavorite(){
+	    $.ajax({
+	        type: "post",
+	        url:"addFavorite" ,
+	        async:false,
+	        dataType: "json",
+	        data:{"movieId":movieId},
+	        success:function(data) {
+			if(data.success==true){
+				var old3 = '';
+				
+					old3 = '<a class="a2 sizetype" href="javascript:void(0);" onclick="removeFavorite()" >取消收藏</a><a href="index.html"class="a1 sizetype">返回首页</a>'
+						$("#favorite").html(old3);	
+				
+				
+			}
+			if (data.success==false) {
+				alert(data.message);
+			}
+	        },
+	        error:function(){alert('err back!')}
+	    });
+	};
+	function removeFavorite(){
+	    $.ajax({
+	        type: "post",
+	        url:"removeFavorite" ,
+	        async:false,
+	        dataType: "json",
+	        data:{"movieId":movieId},
+	        success:function(data) {
+			if(data.success==true){
+				var old3 = '';
+				
+					old3 = '<a class="a2 sizetype" href="javascript:void(0);" onclick="addFavorite()" >加入收藏夹</a><a href="index.html"class="a1 sizetype">返回首页</a>'
+				
+				$("#favorite").html(old3);	
+			}
+			if (data.success==false) {
+				alert(data.message);
+			}
+	        },
+	        error:function(){alert('err back!')}
+	    });
+	};
 </script>
 <script type="text/javascript">	
 var query = window.location.search.substring(1);
@@ -281,5 +341,17 @@ for (var i=0;i<vars.length;i++) {
 	<ul id="accordion" class="accordion">
 	</ul>
 
+<div class="clear"></div>
+<div class="xqbotbox">
+  <div class="xqbotbox0">
+    <div class="xqbotboxL">
+
+    </div>
+    <div class="xqbotboxR" id="favorite">
+      <a class="a2 sizetype" href="javascript:void(0);" onclick="addFavorite()" >加入收藏夹</a>
+      <a href="index.html"class="a1 sizetype">返回首页</a>
+    </div>
+  </div>
+</div>
 </body>
 </html>
