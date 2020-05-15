@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import cn.edu.cqu.Recommend.Pojo.User;
 import cn.edu.cqu.Recommend.Utils.MyJson;
 
 @Service
@@ -31,5 +32,14 @@ public interface UserService {
 	public MyJson getRecommendMovies(HttpSession session);
 
 	public MyJson getRecommendMovies();
+
+	// 添加收藏
+	public MyJson addFavorite(Integer movieId, User user);
+
+	// 取消收藏
+	public MyJson removeFavorite(User user);
+
+	// 获取收藏列表
+	public MyJson getFavorite(User user);
 
 }

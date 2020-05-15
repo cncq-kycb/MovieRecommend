@@ -16,6 +16,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.edu.cqu.Recommend.Dao.CinemaMapper;
+import cn.edu.cqu.Recommend.Dao.LikeRecordMapper;
 import cn.edu.cqu.Recommend.Dao.MovieInfoMapper;
 import cn.edu.cqu.Recommend.Dao.MovieInfoRecommendMapper;
 import cn.edu.cqu.Recommend.Dao.TimelyMovieMapper;
@@ -23,6 +24,8 @@ import cn.edu.cqu.Recommend.Dao.TimelySessionMapper;
 import cn.edu.cqu.Recommend.Pojo.Cinema;
 import cn.edu.cqu.Recommend.Pojo.CinemaExample;
 import cn.edu.cqu.Recommend.Pojo.CinemaSession;
+import cn.edu.cqu.Recommend.Pojo.LikeRecord;
+import cn.edu.cqu.Recommend.Pojo.LikeRecordExample;
 import cn.edu.cqu.Recommend.Pojo.MovieInfo;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoExample;
 import cn.edu.cqu.Recommend.Pojo.MovieInfoRecommendExample;
@@ -53,6 +56,8 @@ public class UserServiceImpl implements UserService {
 	TimelySessionMapper timelySessionMapper;
 	@Autowired
 	MovieInfoRecommendMapper movieInfoRecommendMapper;
+	@Autowired
+	LikeRecordMapper likeRecordMapper;
 
 	@Override
 	public MyJson getUserInfo(HttpSession session) {
@@ -138,6 +143,48 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public MyJson addFavorite(Integer movieId, User user) {
+		LikeRecord likeRecord = new LikeRecord();
+		likeRecord.setMovieId(movieId);
+		likeRecord.setUserId(user.getUserId());
+		likeRecord.setUserTel(user.getUserTel());
+		likeRecord.setLikeRecordTime(new Date());
+		try {
+			likeRecordMapper.insert(likeRecord);
+			return new MyJson(true, "添加收藏成功");
+		} catch (Exception e) {
+			System.err.println(e);
+			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
+		}
+	}
+
+	@Override
+	public MyJson removeFavorite(User user) {
+		LikeRecordExample likeRecordExample = new LikeRecordExample();
+		likeRecordExample.or().andUserIdEqualTo(user.getUserId());
+		try {
+			likeRecordMapper.deleteByExample(likeRecordExample);
+			return new MyJson(true, "取消收藏成功");
+		} catch (Exception e) {
+			System.err.println(e);
+			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
+		}
+	}
+
+	@Override
+	public MyJson getFavorite(User user) {
+		LikeRecordExample likeRecordExample = new LikeRecordExample();
+		likeRecordExample.or().andUserIdEqualTo(user.getUserId());
+		try {
+			List<LikeRecord> likeRecords = likeRecordMapper.selectByExample(likeRecordExample);
+			return new MyJson(true, likeRecords);
+		} catch (Exception e) {
+			System.err.println(e);
+			return new MyJson(false, ErrInfoStrings.DATABASE_ERR);
+		}
+	}
+
+	@Override
 	public MyJson searchMovie(String condition) {
 		condition = "%" + condition + "%";
 		MovieInfoExample movieInfoExample = new MovieInfoExample();
@@ -215,4 +262,5 @@ public class UserServiceImpl implements UserService {
 		}
 
 	}
+
 }

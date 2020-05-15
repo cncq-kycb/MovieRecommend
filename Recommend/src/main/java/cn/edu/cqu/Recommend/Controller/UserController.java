@@ -4,10 +4,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.edu.cqu.Recommend.Pojo.User;
 import cn.edu.cqu.Recommend.Service.ActionService;
 import cn.edu.cqu.Recommend.Service.UserService;
 import cn.edu.cqu.Recommend.Utils.MyJson;
@@ -96,5 +98,41 @@ public class UserController {
 		// return userService.getRecommendMovies();
 		// 数据推荐
 		return userService.getRecommendMovies(session);
+	}
+
+	// 添加收藏
+	@PostMapping(value = "addFavorite")
+	@ResponseBody
+	public MyJson addFavorite(Integer movieId, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			// 未登录
+			return new MyJson(true, LogioStrings.NOT_LOGIN);
+		}
+		return userService.addFavorite(movieId, user);
+	}
+
+	// 取消收藏
+	@PostMapping(value = "removeFavorite")
+	@ResponseBody
+	public MyJson removeFavorite(Integer movieId, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			// 未登录
+			return new MyJson(true, LogioStrings.NOT_LOGIN);
+		}
+		return userService.removeFavorite(user);
+	}
+
+	// 获取收藏列表
+	@GetMapping(value = "getFavorite")
+	@ResponseBody
+	public MyJson getFavorite(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			// 未登录
+			return new MyJson(true, LogioStrings.NOT_LOGIN);
+		}
+		return userService.getFavorite(user);
 	}
 }

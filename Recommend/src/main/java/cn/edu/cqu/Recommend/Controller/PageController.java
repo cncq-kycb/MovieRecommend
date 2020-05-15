@@ -60,4 +60,10 @@ public class PageController {
 		return "tomorrow_list";
 	}
 
+	// 跳转到收藏列表
+	@RequestMapping("favorite.html")
+	public String favorite() {
+		return "favorite.html";
+	}
+
 }
