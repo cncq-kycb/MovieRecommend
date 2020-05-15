@@ -191,10 +191,10 @@ if __name__ == '__main__':
 
     # 初始化数据库
     mhost = 'cdb-mzvws756.cd.tencentcdb.com'
-    muser = 'spider'
+    muser = 'recommend'
     mpassword = 'zxc123!@#'
     mport = 10143
-    mdb = 'spider_data'
+    mdb = 'recommend'
     connect = pymysql.connect(host=mhost, user=muser, password=mpassword, db=mdb, port=mport)
     cursor = connect.cursor()
     URL = ''
