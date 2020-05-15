@@ -162,6 +162,10 @@ a {
 							old3 = '<a class="a2 sizetype" href="javascript:void(0);" onclick="removeFavorite()" >取消收藏</a><a href="index.html"class="a1 sizetype">返回首页</a>'
 								$("#favorite").html(old3);
 						}
+						if(data.message==false){
+							old3 = '<a class="a2 sizetype" href="javascript:void(0);" onclick="addFavorite()" >加入收藏夹</a><a href="index.html"class="a1 sizetype">返回首页</a>'
+								$("#favorite").html(old3);	
+						}
 							
 					}else{
 						alert('err back')
@@ -201,7 +205,7 @@ a {
 			if(data.success==true){
 				var old3 = '';
 				
-					old3 = '<a class="a2 sizetype" href="javascript:void(0);" onclick="addFavorite()" >加入收藏夹</a><a href="index.html"class="a1 sizetype">返回首页</a>'
+					old3 = '<a href="index.html"class="a1 sizetype">返回首页</a>'
 				
 				$("#favorite").html(old3);	
 			}

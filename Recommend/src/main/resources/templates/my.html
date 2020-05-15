@@ -20,11 +20,13 @@
 							old = '<div class="conboxL"><img src="images/tx.png" class="tt"/><div class="btR"><p class="p1">'
 								+ user_info.message.userTel
 								+'</p></div></div><div class="conboxR"><a href="javascript:void(0);" onclick="logout()">退出登录</a></div><div class="clear"></div>';
-							
+							var old2 = '  <div class="con"><div class="pa2_tit"><p>我的收藏夹</p><a href="favorite.html">点击查看 ></a></div></div>';
+							$("#favorite").html(old2);
 						} else {
 							old = '<h2>&ensp;</h2><center><a href="login.html"><h1><font color="white">登录/注册</font></h1></a></center>';
 						}
 						$("#userInfo").html(old);
+
 					});
 </script>
 </head>
@@ -41,14 +43,7 @@
 
 <div class="kbox"></div><div class="kbox"></div>
 <div class="clear"></div>
-<div class="mypart2">
-  <div class="con">
-    <div class="pa2_tit">
-      <p>我的收藏夹</p>
-      <a href="favorite.html">点击查看 ></a>
-    </div>
-    
-  </div>
+<div class="mypart2" id="favorite">
 </div>
 <div class="clear"></div>
 <div class="fbox"></div>
