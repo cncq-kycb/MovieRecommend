@@ -18,7 +18,10 @@
 					action,
 					function(data) {
 						if(data.success==true){
-						
+						if(JSON.stringify(data.message)=="[]"){
+							
+							$("#recommendMovies").html("<h1>&ensp;</h1><h1>&ensp;</h1><h1>&ensp;</h1><center>这里空空如也</center>");
+						}
 						for(i in data.message){
 							var movieId = data.message[i].movieId;
 							$.get(
