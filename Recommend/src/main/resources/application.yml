@@ -7,8 +7,8 @@ spring:
       time-zone: GMT+8
    datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: 'jdbc:mysql://cdb-mzvws756.cd.tencentcdb.com:10143/spider_data?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8'
-      username: spider
+      url: 'jdbc:mysql://cdb-mzvws756.cd.tencentcdb.com:10143/recommend?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8'
+      username: recommend
       password: 'zxc123!@#'
       max-idle: 10
       max-wait: 10000
