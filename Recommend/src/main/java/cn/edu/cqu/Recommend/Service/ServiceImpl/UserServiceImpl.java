@@ -209,6 +209,16 @@ public class UserServiceImpl implements UserService {
 		movieInfoExample.or().andMovieNameLike(condition);
 		try {
 			List<MovieInfoWithBLOBs> movieInfos = movieInfoMapper.selectByExampleWithBLOBs(movieInfoExample);
+			List<Integer> movieIds = movieInfoMapper.selectMovieByActorAndDirector(condition);
+			for (Integer movieId : movieIds) {
+				movieInfoExample.clear();
+				movieInfoExample.or().andMovieIdEqualTo(movieId);
+				List<MovieInfoWithBLOBs> movieInfoWithBLOBs = movieInfoMapper
+						.selectByExampleWithBLOBs(movieInfoExample);
+				if (movieInfoWithBLOBs != null) {
+					movieInfos.addAll(movieInfoWithBLOBs);
+				}
+			}
 			return new MyJson(true, movieInfos);
 		} catch (Exception e) {
 			System.err.println(e);

@@ -265,9 +265,29 @@
 		</if>
 	</update>
 
-	<select id="randomRecommend"
-		resultMap="ResultMapWithBLOBs">
+	<select id="randomRecommend" resultMap="ResultMapWithBLOBs">
 		select *
-		from movie_info ORDER BY RAND() limit 5
+		from movie_info
+		ORDER BY RAND() limit 5
+	</select>
+
+	<select id="selectMovieByActorAndDirector" resultType="Integer">
+		SELECT
+		director_movie_map.movie_id
+		FROM
+		director_movie_map
+		JOIN director ON
+		director.director_id = director_movie_map.director_id
+		WHERE
+		director.director_name LIKE #{condition} UNION
+		SELECT
+		actor_movie_map.movie_id
+		FROM
+		actor_movie_map
+		JOIN actor ON
+		actor.actor_id = actor_movie_map.actor_id
+		WHERE
+		actor.actor_name LIKE
+		#{condition}
 	</select>
 </mapper>
